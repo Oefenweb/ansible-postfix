@@ -1,0 +1,11 @@
+---
+# defaults file for postfix
+postfix_install:
+  - postfix
+  - mailutils
+  - libsasl2-2
+  - sasl2-bin
+  - libsasl2-modules
+postfix_hostname: "{{ ansible_fqdn }}"
+postfix_mailname: "{{ ansible_fqdn }}"
+postfix_aliases: []

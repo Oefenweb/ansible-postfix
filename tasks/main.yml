@@ -1,0 +1,50 @@
+---
+# tasks file for postfix
+- name: install package
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: postfix_install
+  tags: [configuration, postfix, postfix-install]
+
+- name: configure mailname
+  template:
+    src: mailname.j2
+    dest: /etc/mailname
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart postfix
+  tags: [configuration, postfix, postfix-mailname]
+
+- name: update configuration file
+  template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart postfix
+  tags: [configuration, postfix, postfix-configuration]
+
+- name: configure aliases
+  lineinfile:
+    dest: /etc/aliases
+    regexp: '^{{ item.user }}:\s+{{ item.alias }}'
+    line: '{{ item.user }}: {{ item.alias }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items: postfix_aliases
+  when: postfix_aliases
+  notify:
+    - new aliases
+    - restart postfix
+  tags: [configuration, postfix, postfix-aliases]
+
+- name: start and enable service
+  service:
+    name: postfix
+    state: started
+    enabled: yes
+  tags: [configuration, postfix, postfix-start-enable-service]

@@ -4,8 +4,8 @@ galaxy_info:
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up a postfix server in Debian-like systems.
-  license: BSD
-  min_ansible_version: 1.4
+  license: MIT
+  min_ansible_version: 1.6
   platforms:
   - name: Ubuntu
     versions:

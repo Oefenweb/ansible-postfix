@@ -15,7 +15,8 @@ None
 
 ## Dependencies
 
-None
+* `debconf`
+* `debconf-utils`
 
 #### Example
 

@@ -9,7 +9,7 @@
 
 - name: configure mailname
   template:
-    src: mailname.j2
+    src: etc/mailname.j2
     dest: /etc/mailname
     owner: root
     group: root
@@ -19,7 +19,7 @@
 
 - name: update configuration file
   template:
-    src: main.cf.j2
+    src: etc/postfix/main.cf.j2
     dest: /etc/postfix/main.cf
     owner: root
     group: root

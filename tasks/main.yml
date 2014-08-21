@@ -12,7 +12,7 @@
 - name: install package
   apt:
     name: "{{ item }}"
-    state: present
+    state: latest
   with_items: postfix_install
   tags: [configuration, postfix, postfix-install]
 

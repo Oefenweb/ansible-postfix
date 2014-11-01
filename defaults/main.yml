@@ -9,3 +9,7 @@ postfix_install:
 postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
 postfix_aliases: []
+postfix_relayhost: no
+postfix_relayhost_port: 587
+postfix_sasl_user: "postmaster@{{ ansible_domain }}"
+postfix_sasl_password: "password"

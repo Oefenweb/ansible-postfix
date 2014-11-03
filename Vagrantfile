@@ -31,7 +31,7 @@ boxes = [
     :ram => "256"
   },
   {
-    :name => "debian-6.0.10",
+    :name => "debian-6010",
     :box => "opscode-debian-6.0.10",
     :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-6.0.10_chef-provisionerless.box",
     :ip => '10.0.0.13',
@@ -39,7 +39,7 @@ boxes = [
     :ram => "256"
   },
   {
-    :name => "debian-7.6",
+    :name => "debian-76",
     :box => "opscode-debian-7.6",
     :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.6_chef-provisionerless.box",
     :ip => '10.0.0.14',

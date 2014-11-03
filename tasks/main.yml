@@ -13,6 +13,7 @@
   apt:
     name: "{{ item }}"
     state: latest
+    update_cache: true
   with_items: postfix_install
   tags: [configuration, postfix, postfix-install]
 

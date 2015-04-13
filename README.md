@@ -16,6 +16,7 @@ None
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
  * `postfix_relayport` [default: 587]: Relay port (on postfix_relayhost, if set)
+ * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password
  
@@ -47,6 +48,21 @@ Provide the relay host name if you want to enable relaying:
     postfix_aliases:
     - { user: root, alias: you@yourdomain.org }
     postfix_relayhost: mail.yourdomain.org
+```
+
+For AWS SES support:
+```yaml
+- hosts: all
+  roles:
+  - postfix
+  vars:
+    postfix_aliases:
+    - { user: root, alias: sesverified@yourdomain.org }
+    postfix_relayhost: email-smtp.us-east-1.amazonaws.com
+    postfix_relaytls: yes
+    # AWS IAM SES credentials (not access key):
+    postfix_sasl_user: AKIXXXXXXXXXXXXXXXXX
+    postfix_sasl_password: ASDFXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 #### License

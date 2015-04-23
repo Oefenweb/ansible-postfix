@@ -52,6 +52,7 @@ Provide the relay host name if you want to enable relaying:
 
 For AWS SES support:
 ```yaml
+---
 - hosts: all
   roles:
   - postfix
@@ -59,7 +60,7 @@ For AWS SES support:
     postfix_aliases:
     - { user: root, alias: sesverified@yourdomain.org }
     postfix_relayhost: email-smtp.us-east-1.amazonaws.com
-    postfix_relaytls: yes
+    postfix_relaytls: true
     # AWS IAM SES credentials (not access key):
     postfix_sasl_user: AKIXXXXXXXXXXXXXXXXX
     postfix_sasl_password: ASDFXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

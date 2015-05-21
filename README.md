@@ -18,7 +18,7 @@ None
  * `postfix_relayport` [default: 587]: Relay port (on postfix_relayhost, if set)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
- * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password
+ * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  
 ## Dependencies
 

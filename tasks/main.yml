@@ -37,6 +37,19 @@
   notify: restart postfix
   tags: [configuration, postfix, postfix-configuration]
 
+- name: configure sasl username/password
+  template:
+    src: etc/postfix/sasl_passwd.j2
+    dest: /etc/postfix/sasl_passwd
+    owner: root
+    group: root
+    mode: 0600
+  when: postfix_relayhost != false
+  notify:
+    - postmap sasl_passwd
+    - restart postfix
+  tags: [configuration, postfix, postfix-sasl-passwd]
+
 - name: configure aliases
   lineinfile:
     dest: /etc/aliases

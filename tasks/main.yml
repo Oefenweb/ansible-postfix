@@ -1,5 +1,5 @@
----
 # tasks file for postfix
+---
 - name: configure debconf
   debconf:
     name: "{{ item.name }}"

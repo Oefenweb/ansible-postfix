@@ -1,5 +1,5 @@
----
 # test file for postfix
+---
 - hosts: localhost
   remote_user: root
   roles:

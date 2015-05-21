@@ -39,7 +39,7 @@ script:
 
   # Test postfix connection
   - >
-    echo QUIT | nc 127.0.0.1 25
+    echo QUIT | telnet 127.0.0.1 25
 
   # Test postfix connection
   - >

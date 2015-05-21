@@ -15,7 +15,7 @@ None
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
- * `postfix_relayport` [default: 587]: Relay port (on postfix_relayhost, if set)
+ * `postfix_relayport` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**

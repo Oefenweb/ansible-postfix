@@ -40,6 +40,10 @@ script:
   # Test postfix connection
   - >
     echo QUIT | nc 127.0.0.1 25
+
+  # Test postfix connection
+  - >
+    echo QUIT | nc 127.0.0.1 25
     | grep 220 | grep -q -i postfix
     && (echo 'Availability test: pass' && exit 0)
     || (echo 'Availability test: fail' && exit 1)

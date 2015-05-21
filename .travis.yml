@@ -13,6 +13,9 @@ before_install:
   # Remove postfix
   - sudo apt-get remove --purge postfix
 
+  # Install netcat
+  - sudo apt-get install netcat-traditional
+
 install:
   # Install Ansible.
   - pip install ansible==$ANSIBLE_VERSION
@@ -33,6 +36,13 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Test postfix connection
+  - >
+    echo QUIT | nc 127.0.0.1 25
+    | grep 220 | grep -q -i postfix
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
 
 notifications:
   email: false

@@ -5,3 +5,7 @@
   sudo: true
   roles:
     - "{{ lookup('pipe', 'pwd') | dirname | basename }}"
+  vars:
+    directory_name0: "{{ lookup('pipe', 'pwd') }}"
+    directory_name1: "{{ lookup('pipe', 'pwd') | dirname }}"
+    directory_name2: "{{ lookup('pipe', 'pwd') | dirname | basename }}"

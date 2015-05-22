@@ -3,4 +3,7 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - "{{ lookup('pipe', 'pwd') | dirname | basename }}"
+    - ansible-postfix
+  vars:
+    directory_name0: "{{ lookup('pipe', 'pwd') }}"
+    directory_name1: "{{ lookup('env', 'PWD') | dirname }}"

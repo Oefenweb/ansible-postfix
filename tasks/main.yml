@@ -1,10 +1,5 @@
 # tasks file for postfix
 ---
-- name: debug
-  debug:
-    msg: "{{ directory_name0 }} {{ directory_name1 }}"
-  tags: [configuration, postfix, postfix-install]
-
 - name: configure debconf
   debconf:
     name: "{{ item.name }}"

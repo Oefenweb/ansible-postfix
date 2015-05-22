@@ -3,7 +3,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-postfix
-  vars:
-    directory_name0: "{{ lookup('pipe', 'pwd') }}"
-    directory_name1: "{{ lookup('env', 'PWD') | dirname }}"
+    - "{{ lookup('env', 'CLONE_DIRECTORY_NAME') }}"

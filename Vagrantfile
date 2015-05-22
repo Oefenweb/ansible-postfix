@@ -2,6 +2,7 @@
 # vi: set ft=ruby ts=2 sw=2 tw=0 et :
 
 role = File.basename(File.expand_path(File.dirname(__FILE__)))
+ENV['CLONE_DIRECTORY_NAME'] = role
 
 File.open(File.dirname(__FILE__) + '/ansible.cfg', 'w') { |f| f.write("[defaults]\nroles_path = ../") }
 

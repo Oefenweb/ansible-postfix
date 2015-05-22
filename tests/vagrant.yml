@@ -4,4 +4,4 @@
   remote_user: vagrant
   sudo: true
   roles:
-    - postfix
+    - "{{ lookup('env', 'CLONE_DIRECTORY_NAME') }}"

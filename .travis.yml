@@ -26,6 +26,10 @@ env:
   - ANSIBLE_VERSION=1.6.1
   - ANSIBLE_VERSION=1.6
 
+branches:
+  only:
+    - master
+
 before_install:
   - sudo apt-get update -qq
 

@@ -3,7 +3,7 @@
 galaxy_info:
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
-  description: Set up a postfix server in Debian-like systems.
+  description: Set up a postfix server in Debian-like systems
   license: MIT
   min_ansible_version: 1.6
   platforms:

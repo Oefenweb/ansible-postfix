@@ -21,8 +21,8 @@ Thumbs.db
 
 # Vagrant files #
 .virtualbox/
-virtualbox_ansible_inventory_*
 .vagrant/
+vagrant_ansible_inventory_*
 ansible.cfg
 
 # Other files #

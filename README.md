@@ -33,7 +33,7 @@ A simple example that doesn't use SASL relaying:
 ---
 - hosts: all
   roles:
-  - postfix
+    - postfix
   vars:
     postfix_aliases:
     - { user: root, alias: you@yourdomain.org }
@@ -44,7 +44,7 @@ Provide the relay host name if you want to enable relaying:
 ---
 - hosts: all
   roles:
-  - postfix
+    - postfix
   vars:
     postfix_aliases:
     - { user: root, alias: you@yourdomain.org }
@@ -56,7 +56,7 @@ For AWS SES support:
 ---
 - hosts: all
   roles:
-  - postfix
+    - postfix
   vars:
     postfix_aliases:
     - { user: root, alias: sesverified@yourdomain.org }

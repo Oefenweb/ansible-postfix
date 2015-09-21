@@ -16,7 +16,7 @@ None
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind (Postfix setting: [`inet_interfaces`](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
- * `postfix_relayport` [default: 587]: Relay port (on `postfix_relayhost`, if set)
+ * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**

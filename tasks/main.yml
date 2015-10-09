@@ -60,7 +60,6 @@
     group: root
     mode: 0644
   with_items: postfix_aliases
-  when: postfix_aliases
   notify:
     - new aliases
     - restart postfix
@@ -70,5 +69,5 @@
   service:
     name: postfix
     state: started
-    enabled: yes
+    enabled: true
   tags: [configuration, postfix, postfix-start-enable-service]

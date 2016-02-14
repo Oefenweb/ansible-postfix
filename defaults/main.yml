@@ -15,3 +15,4 @@ postfix_relaytls: false
 postfix_sasl_user: "postmaster@{{ ansible_domain }}"
 postfix_sasl_password: 'k8+haga4@#pR'
 postfix_inet_interfaces: all
+postfix_inet_protocols: all

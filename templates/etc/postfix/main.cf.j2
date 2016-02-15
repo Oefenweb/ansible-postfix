@@ -36,7 +36,7 @@ mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = {{ postfix_inet_interfaces }}
-inet_protocols = ipv4
+inet_protocols = {{ postfix_inet_protocols }}
 
 {% if postfix_relayhost %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}

@@ -14,7 +14,8 @@ None
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
- * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind (Postfix setting: [`inet_interfaces`](http://www.postfix.org/postconf.5.html#inet_interfaces))
+ * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
+ * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host

@@ -14,7 +14,7 @@ None
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
- * `postfix_mynetworks` [default: `127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers".
+ * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
@@ -38,7 +38,7 @@ A simple example that doesn't use SASL relaying:
     - postfix
   vars:
     postfix_aliases:
-    - { user: root, alias: you@yourdomain.org }
+      - { user: root, alias: you@yourdomain.org }
 ```
 
 Provide the relay host name if you want to enable relaying:
@@ -49,7 +49,7 @@ Provide the relay host name if you want to enable relaying:
     - postfix
   vars:
     postfix_aliases:
-    - { user: root, alias: you@yourdomain.org }
+      - { user: root, alias: you@yourdomain.org }
     postfix_relayhost: mail.yourdomain.org
 ```
 
@@ -61,7 +61,7 @@ For AWS SES support:
     - postfix
   vars:
     postfix_aliases:
-    - { user: root, alias: sesverified@yourdomain.org }
+      - { user: root, alias: sesverified@yourdomain.org }
     postfix_relayhost: email-smtp.us-east-1.amazonaws.com
     postfix_relaytls: true
     # AWS IAM SES credentials (not access key):

@@ -44,7 +44,7 @@ before_install:
   - sudo apt-get update -qq
 
   # Remove postfix
-  - sudo apt-get remove --purge postfix
+  - sudo apt-get remove --purge --yes postfix
 
 install:
   # Install Ansible.

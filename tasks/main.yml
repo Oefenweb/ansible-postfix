@@ -6,7 +6,7 @@
     question: "{{ item.question }}"
     value: "{{ item.value }}"
     vtype: "{{ item.vtype }}"
-  with_items: postfix_debconf_selections
+  with_items: "{{ postfix_debconf_selections }}"
   tags: [configuration, postfix, postfix-install]
 
 - name: install package
@@ -15,7 +15,7 @@
     state: latest
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items: postfix_install
+  with_items: "{{ postfix_install }}"
   tags: [configuration, postfix, postfix-install]
 
 - name: configure mailname
@@ -59,7 +59,7 @@
     owner: root
     group: root
     mode: 0644
-  with_items: postfix_aliases
+  with_items: "{{ postfix_aliases }}"
   notify:
     - new aliases
     - restart postfix

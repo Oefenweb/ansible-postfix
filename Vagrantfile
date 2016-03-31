@@ -45,9 +45,9 @@ boxes = [
     :ram => "256"
   },
   {
-    :name => "debian-82",
-    :box => "opscode-debian-8.2",
-    :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-8.2_chef-provisionerless.box",
+    :name => "debian-83",
+    :box => "opscode-debian-8.3",
+    :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-8.3_chef-provisionerless.box",
     :ip => '10.0.0.15',
     :cpu => "50",
     :ram => "256"

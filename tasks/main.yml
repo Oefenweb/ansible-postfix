@@ -54,7 +54,7 @@
 - name: configure aliases
   lineinfile:
     dest: /etc/aliases
-    regexp: '^{{ item.user }}:\s+{{ item.alias }}'
+    regexp: '^{{ item.user }}:.*'
     line: '{{ item.user }}: {{ item.alias }}'
     owner: root
     group: root

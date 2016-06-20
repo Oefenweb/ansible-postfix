@@ -7,7 +7,10 @@
     value: "{{ item.value }}"
     vtype: "{{ item.vtype }}"
   with_items: "{{ postfix_debconf_selections }}"
-  tags: [configuration, postfix, postfix-install]
+  tags:
+    - configuration
+    - postfix
+    - postfix-install
 
 - name: install package
   apt:
@@ -16,7 +19,10 @@
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   with_items: "{{ postfix_install }}"
-  tags: [configuration, postfix, postfix-install]
+  tags:
+    - configuration
+    - postfix
+    - postfix-install
 
 - name: configure mailname
   template:
@@ -26,7 +32,10 @@
     group: root
     mode: 0644
   notify: restart postfix
-  tags: [configuration, postfix, postfix-mailname]
+  tags:
+    - configuration
+    - postfix
+    - postfix-mailname
 
 - name: update configuration file
   template:
@@ -36,7 +45,10 @@
     group: root
     mode: 0644
   notify: restart postfix
-  tags: [configuration, postfix, postfix-configuration]
+  tags:
+    - configuration
+    - postfix
+    - postfix-configuration
 
 - name: configure sasl username/password
   template:
@@ -49,7 +61,10 @@
   notify:
     - postmap sasl_passwd
     - restart postfix
-  tags: [configuration, postfix, postfix-sasl-passwd]
+  tags:
+    - configuration
+    - postfix
+    - postfix-sasl-passwd
 
 - name: configure aliases
   lineinfile:
@@ -63,11 +78,17 @@
   notify:
     - new aliases
     - restart postfix
-  tags: [configuration, postfix, postfix-aliases]
+  tags:
+    - configuration
+    - postfix
+    - postfix-aliases
 
 - name: start and enable service
   service:
     name: postfix
     state: started
     enabled: true
-  tags: [configuration, postfix, postfix-start-enable-service]
+  tags:
+    - configuration
+    - postfix
+    - postfix-start-enable-service

@@ -5,14 +5,6 @@ role = File.basename(File.expand_path(File.dirname(__FILE__)))
 
 boxes = [
   {
-    :name => "ubuntu-1004",
-    :box => "opscode-ubuntu-10.04",
-    :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-10.04_chef-provisionerless.box",
-    :ip => '10.0.0.10',
-    :cpu => "50",
-    :ram => "256"
-   },
-  {
     :name => "ubuntu-1204",
     :box => "opscode-ubuntu-12.04",
     :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box",
@@ -29,9 +21,9 @@ boxes = [
     :ram => "256"
   },
   {
-    :name => "debian-6010",
-    :box => "opscode-debian-6.0.10",
-    :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-6.0.10_chef-provisionerless.box",
+    :name => "ubuntu-1604",
+    :box => "opscode-ubuntu-16.04",
+    :url => "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-16.04_chef-provisionerless.box",
     :ip => '10.0.0.13',
     :cpu => "50",
     :ram => "256"

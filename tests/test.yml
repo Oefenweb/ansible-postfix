@@ -2,6 +2,6 @@
 ---
 - hosts: localhost
   connection: local
-  sudo: true
+  become: true
   roles:
     - ../../

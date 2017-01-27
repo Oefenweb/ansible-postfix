@@ -2,6 +2,6 @@
 ---
 - hosts: all
   remote_user: vagrant
-  sudo: true
+  become: true
   roles:
     - ../../

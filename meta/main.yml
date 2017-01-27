@@ -5,7 +5,7 @@ galaxy_info:
   company: Oefenweb.nl B.V.
   description: Set up a postfix server in Debian-like systems
   license: MIT
-  min_ansible_version: 1.6
+  min_ansible_version: 1.9.6
   platforms:
     - name: Ubuntu
       versions:

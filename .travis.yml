@@ -7,7 +7,9 @@ python: "2.7"
 
 env:
   - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.2.1.0
   - ANSIBLE_VERSION=2.2.0.0
+  - ANSIBLE_VERSION=2.1.4
   - ANSIBLE_VERSION=2.1.3
   - ANSIBLE_VERSION=2.1.2
   - ANSIBLE_VERSION=2.1.1.0
@@ -18,31 +20,6 @@ env:
   - ANSIBLE_VERSION=2.0.0.1
   - ANSIBLE_VERSION=2.0.0.0
   - ANSIBLE_VERSION=1.9.6
-  - ANSIBLE_VERSION=1.9.5
-  - ANSIBLE_VERSION=1.9.4
-  - ANSIBLE_VERSION=1.9.3
-  - ANSIBLE_VERSION=1.9.2
-  - ANSIBLE_VERSION=1.9.1
-  - ANSIBLE_VERSION=1.9.0.1
-  - ANSIBLE_VERSION=1.8.4
-  - ANSIBLE_VERSION=1.8.3
-  - ANSIBLE_VERSION=1.8.2
-  - ANSIBLE_VERSION=1.8.1
-  - ANSIBLE_VERSION=1.8
-  - ANSIBLE_VERSION=1.7.2
-  - ANSIBLE_VERSION=1.7.1
-  - ANSIBLE_VERSION=1.7
-  - ANSIBLE_VERSION=1.6.9
-  - ANSIBLE_VERSION=1.6.8
-  - ANSIBLE_VERSION=1.6.7
-  - ANSIBLE_VERSION=1.6.6
-  - ANSIBLE_VERSION=1.6.5
-  - ANSIBLE_VERSION=1.6.4
-  - ANSIBLE_VERSION=1.6.3
-  - ANSIBLE_VERSION=1.6.2
-  - ANSIBLE_VERSION=1.6.10
-  - ANSIBLE_VERSION=1.6.1
-  - ANSIBLE_VERSION=1.6
 
 branches:
   only:
@@ -56,7 +33,8 @@ before_install:
 
 install:
   # Install Ansible.
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --no-binary ansible ansible; else pip install --no-binary ansible ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 
 script:
   # Check the role/playbook's syntax.
@@ -71,6 +49,8 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml || true; fi
 
 notifications:
   email: false

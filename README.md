@@ -22,6 +22,7 @@ None
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
+ * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  
@@ -40,7 +41,8 @@ A simple example that doesn't use SASL relaying:
     - postfix
   vars:
     postfix_aliases:
-      - { user: root, alias: you@yourdomain.org }
+      - user: root
+        alias: you@yourdomain.org
 ```
 
 Provide the relay host name if you want to enable relaying:
@@ -51,7 +53,8 @@ Provide the relay host name if you want to enable relaying:
     - postfix
   vars:
     postfix_aliases:
-      - { user: root, alias: you@yourdomain.org }
+      - user: root
+        alias: you@yourdomain.org
     postfix_relayhost: mail.yourdomain.org
 ```
 
@@ -63,7 +66,8 @@ For AWS SES support:
     - postfix
   vars:
     postfix_aliases:
-      - { user: root, alias: sesverified@yourdomain.org }
+      - user: root
+        alias: sesverified@yourdomain.org
     postfix_relayhost: email-smtp.us-east-1.amazonaws.com
     postfix_relaytls: true
     # AWS IAM SES credentials (not access key):
@@ -79,10 +83,28 @@ For MailHog support:
     - postfix
   vars:
     postfix_aliases:
-      - { user: root, alias: you@yourdomain.org }
+      - user: root
+        alias: you@yourdomain.org
     postfix_relayhost: "{{ ansible_lo['ipv4']['address'] }}"
     postfix_relayhost_port: 1025
     postfix_sasl_auth_enable: false
+```
+
+For Gmail support:
+```yaml
+---
+- hosts: all
+  roles:
+    - postfix
+  vars:
+    postfix_aliases:
+      - user: root
+        alias: you@yourdomain.org
+    postfix_relayhost: smtp.gmail.com
+    postfix_relaytls: true
+    postfix_smtp_tls_cafile: /etc/ssl/certs/ca-certificates.crt
+    postfix_sasl_user: 'foo'
+    postfix_sasl_password: 'bar'
 ```
 
 #### License

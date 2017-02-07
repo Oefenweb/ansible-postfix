@@ -49,6 +49,9 @@ smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 smtp_use_tls = yes
 smtp_tls_security_level = encrypt
 smtp_tls_note_starttls_offer = yes
+{% if postfix_smtp_tls_cafile is defined %}
+smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
+{% endif %}
 {% endif %}
 {% else %}
 relayhost =

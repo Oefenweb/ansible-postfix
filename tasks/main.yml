@@ -83,6 +83,22 @@
     - postfix
     - postfix-aliases
 
+- name: configure sender canonical maps
+  lineinfile:
+    dest: /etc/postfix/sender_canonical_maps
+    regexp: '^{{ item.sender }}.*'
+    line: '{{ item.sender }} {{ item.rewrite }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: yes
+    state: present
+  with_items: "{{ postfix_sender_canonical_maps }}"
+  when: postfix_sender_canonical_maps
+  notify:
+    - postmap sender_canonical_maps
+    - restart postfix
+
 - name: start and enable service
   service:
     name: postfix

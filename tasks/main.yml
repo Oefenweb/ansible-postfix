@@ -74,6 +74,8 @@
     owner: root
     group: root
     mode: 0644
+    create: true
+    state: present
   with_items: "{{ postfix_aliases }}"
   notify:
     - new aliases
@@ -91,10 +93,9 @@
     owner: root
     group: root
     mode: 0644
-    create: yes
+    create: true
     state: present
   with_items: "{{ postfix_sender_canonical_maps }}"
-  when: postfix_sender_canonical_maps
   notify:
     - postmap sender_canonical_maps
     - restart postfix

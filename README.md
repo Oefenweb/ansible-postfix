@@ -14,6 +14,7 @@ None
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
+ * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_canonical_maps))
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
@@ -25,7 +26,7 @@ None
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
- 
+
 ## Dependencies
 
 * `debconf`
@@ -43,6 +44,18 @@ A simple example that doesn't use SASL relaying:
     postfix_aliases:
       - user: root
         alias: you@yourdomain.org
+```
+
+A simple example that rewrites the sender address:
+```yaml
+---
+- hosts: all
+  roles:
+    - postfix
+  vars:
+    postfix_sender_canonical_maps:
+      - sender: root
+        rewrite: postmaster@example.com
 ```
 
 Provide the relay host name if you want to enable relaying:

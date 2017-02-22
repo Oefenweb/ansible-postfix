@@ -7,7 +7,7 @@
 # is /etc/mailname.
 myorigin = /etc/mailname
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_banner = {{ postfix_smtpd_banner }}
 biff = no
 
 # appending .domain is the MUA's job.

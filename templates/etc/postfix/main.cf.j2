@@ -59,3 +59,6 @@ smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% else %}
 relayhost =
 {% endif %}
+
+# Disable the SMTP VRFY command. This stops some techniques used to harvest email addresses.
+disable_vrfy_command = {{ postfix_disable_vrfy_command }}

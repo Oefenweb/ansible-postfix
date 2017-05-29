@@ -44,7 +44,7 @@ inet_protocols = {{ postfix_inet_protocols }}
 {% if postfix_relayhost %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
 {% if postfix_sasl_auth_enable %}
-smtp_sasl_auth_enable = {{ 'yes' if postfix_sasl_auth_enable else 'no' }}
+smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 {% endif %}
@@ -61,4 +61,4 @@ relayhost =
 {% endif %}
 
 # Disable the SMTP VRFY command. This stops some techniques used to harvest email addresses.
-disable_vrfy_command = {{ postfix_disable_vrfy_command }}
+disable_vrfy_command = {{ postfix_disable_vrfy_command | bool | ternary('yes', 'no') }}

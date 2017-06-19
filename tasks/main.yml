@@ -85,6 +85,25 @@
     - postfix
     - postfix-aliases
 
+- name: configure virtual aliases
+  lineinfile:
+    dest: /etc/postfix/virtual
+    regexp: '^{{ item.virtual }}.*'
+    line: '{{ item.virtual }} {{ item.alias }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  with_items: "{{ postfix_virtual_aliases }}"
+  notify:
+    - new virtual aliases
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-virtual-aliases
+
 - name: configure sender canonical maps
   lineinfile:
     dest: /etc/postfix/sender_canonical_maps

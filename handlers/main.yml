@@ -8,6 +8,9 @@
 - name: new aliases
   command: newaliases
 
+- name: new virtual aliases
+  command: postmap /etc/postfix/virtual
+
 - name: postmap sasl_passwd
   command: postmap hash:/etc/postfix/sasl_passwd
 

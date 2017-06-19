@@ -14,6 +14,7 @@ None
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
+ * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_canonical_maps))
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
@@ -46,6 +47,20 @@ A simple example that doesn't use SASL relaying:
     postfix_aliases:
       - user: root
         alias: you@yourdomain.org
+```
+
+A simple example with virtual aliases for mail forwarding that doesn't use SASL relaying:
+```yaml
+---
+- hosts: all
+  roles:
+    - postfix
+  vars:
+    - postfix_virtual_aliases:
+      - virtual: webmaster@yourdomain.com
+        alias: personal_email@gmail.com
+      - virtual: billandbob@yourdomain.com
+        alias: bill@gmail.com, bob@gmail.com
 ```
 
 A simple example that rewrites the sender address:

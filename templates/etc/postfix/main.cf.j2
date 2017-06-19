@@ -31,10 +31,13 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 myhostname = {{ postfix_hostname }}
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
+{% if postfix_virtual_aliases %}
+virtual_alias_maps = hash:/etc/postfix/virtual
+{% endif %}
 {% if postfix_sender_canonical_maps %}
 sender_canonical_maps = hash:/etc/postfix/sender_canonical_maps
 {% endif %}
-mydestination = {{ postfix_hostname }}, localdomain, localhost, localhost.localdomain
+mydestination = {{ postfix_hostname }}, $mydomain, localdomain, localhost, localhost.localdomain
 mynetworks = {{ postfix_mynetworks | join(' ') }}
 mailbox_size_limit = 0
 recipient_delimiter = +

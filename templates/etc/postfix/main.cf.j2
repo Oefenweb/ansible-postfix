@@ -37,7 +37,7 @@ virtual_alias_maps = hash:/etc/postfix/virtual
 {% if postfix_sender_canonical_maps %}
 sender_canonical_maps = hash:/etc/postfix/sender_canonical_maps
 {% endif %}
-mydestination = {{ postfix_hostname }}, $mydomain, localdomain, localhost, localhost.localdomain
+mydestination = {{ postfix_mydestination | join(', ') }}
 mynetworks = {{ postfix_mynetworks | join(' ') }}
 mailbox_size_limit = 0
 recipient_delimiter = +

@@ -20,6 +20,11 @@ postfix_sasl_password: 'k8+haga4@#pR'
 postfix_sasl_security_options: noanonymous
 postfix_inet_interfaces: all
 postfix_inet_protocols: all
+postfix_mydestination:
+  - "{{ postfix_hostname }}"
+  - localdomain
+  - localhost
+  - localhost.localdomain
 postfix_mynetworks:
   - 127.0.0.0/8
   - '[::ffff:127.0.0.0]/104'

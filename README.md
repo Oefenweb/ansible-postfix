@@ -16,6 +16,7 @@ None
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_canonical_maps))
+ * `postfix_mydestination` [default: `["{{ postfix_hostname }}", 'localdomain', 'localhost', 'localhost.localdomain']`]: Specifies what domains this machine will deliver locally, instead of forwarding to another machine
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
@@ -56,7 +57,13 @@ A simple example with virtual aliases for mail forwarding that doesn't use SASL 
   roles:
     - postfix
   vars:
-    - postfix_virtual_aliases:
+    postfix_mydestination:
+      - "{{ postfix_hostname }}"
+      - '$mydomain'
+      - localdomain
+      - localhost
+      - localhost.localdomain
+    postfix_virtual_aliases:
       - virtual: webmaster@yourdomain.com
         alias: personal_email@gmail.com
       - virtual: billandbob@yourdomain.com

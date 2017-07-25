@@ -62,6 +62,6 @@ smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% else %}
 relayhost =
 {% endif %}
-
+message_size_limit = {{  postfix_message_size_limit }}
 # Disable the SMTP VRFY command. This stops some techniques used to harvest email addresses.
 disable_vrfy_command = {{ postfix_disable_vrfy_command | bool | ternary('yes', 'no') }}

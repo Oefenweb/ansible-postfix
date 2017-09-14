@@ -11,6 +11,7 @@ postfix_mailname: "{{ ansible_fqdn }}"
 postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
+postfix_generic: []
 postfix_relayhost: false
 postfix_relayhost_port: 587
 postfix_relaytls: false

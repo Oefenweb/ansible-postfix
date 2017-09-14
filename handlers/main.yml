@@ -16,3 +16,6 @@
 
 - name: postmap sender_canonical_maps
   command: postmap hash:/etc/postfix/sender_canonical_maps
+
+- name: postmap generic
+  command: postmap hash:/etc/postfix/generic

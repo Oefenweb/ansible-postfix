@@ -119,6 +119,21 @@
     - postmap sender_canonical_maps
     - restart postfix
 
+- name: configure generic table
+  lineinfile:
+    dest: /etc/postfix/generic
+    regexp: '^{{ item.pattern }}.*'
+    line: '{{ item.pattern }} {{ item.result }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  with_items: "{{ postfix_generic }}"
+  notify:
+    - postmap generic
+    - restart postfix
+
 - name: start and enable service
   service:
     name: postfix

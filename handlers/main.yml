@@ -1,6 +1,20 @@
 # handlers file for postfix
 ---
 - name: restart postfix
+  command: /bin/true
+  notify:
+    - remove pid
+    - restart service
+
+- name: remove pid
+  file:
+    path: "~postfix/pid/master.pid"
+    state: absent
+  when: >
+    (ansible_virtualization_role | default('host') == "guest")
+    and (ansible_virtualization_type | default('none') == "docker")
+
+- name: restart service
   service:
     name: postfix
     state: restarted

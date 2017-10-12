@@ -1,5 +1,13 @@
 # tasks file for postfix
 ---
+- name: facts | set
+  set_fact:
+     is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
+  tags:
+    - configuration
+    - postfix
+    - postfix-facts
+
 - name: configure debconf
   debconf:
     name: "{{ item.name }}"

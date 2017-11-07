@@ -16,6 +16,7 @@
   service:
     name: postfix
     state: restarted
+  when: service_default_state | default('started') == 'started'
 
 - name: new aliases
   command: newaliases

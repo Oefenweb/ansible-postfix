@@ -66,6 +66,7 @@
     group: root
     mode: 0600
   when: postfix_relayhost != false
+  no_log: true
   notify:
     - postmap sasl_passwd
     - restart postfix

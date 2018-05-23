@@ -127,6 +127,10 @@
   notify:
     - postmap sender_canonical_maps
     - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-sender-canonical-maps
 
 - name: configure generic table
   lineinfile:
@@ -142,6 +146,10 @@
   notify:
     - postmap generic
     - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-generic-table
 
 - name: start and enable service
   service:

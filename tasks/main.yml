@@ -1,5 +1,11 @@
 # tasks file for postfix
 ---
+- name: Import platform specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+    - 'main.yml'
+
 - name: facts | set
   set_fact:
      is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
@@ -19,13 +25,13 @@
     - configuration
     - postfix
     - postfix-install
+  when: ansible_os_family == "Debian"
 
 - name: install package
-  apt:
+  package:
     name: "{{ item }}"
-    state: "{{ apt_install_state | default('latest') }}"
+    state: "{{ install_state | default('latest') }}"
     update_cache: true
-    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   with_items: "{{ postfix_install }}"
   tags:
     - configuration

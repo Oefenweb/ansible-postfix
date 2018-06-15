@@ -17,6 +17,9 @@ galaxy_info:
         - wheezy
         - jessie
         - stretch
+    - name: EL
+      versions:
+        - all
   galaxy_tags:
     - system
     - web

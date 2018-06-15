@@ -1,0 +1,7 @@
+# vars file for postfix
+postfix_install:
+  - postfix
+  - mailx
+  - cyrus-sasl
+  - cyrus-sasl-lib
+  - libselinux-python

@@ -25,6 +25,7 @@ None
  * `postfix_sasl_auth_enable` [default: `true`]: Enable SASL authentication in the SMTP client
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
+ * `postfix_smtpd_relay_restrictions` [optional]: List of access restrictions for mail relay control ([see](http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions))
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
  * `postfix_sasl_mechanism_filter` [default: `''`]: SMTP client SASL authentication mechanism filter ([see](http://www.postfix.org/postconf.5.html#smtp_sasl_mechanism_filter))
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host

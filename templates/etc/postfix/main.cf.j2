@@ -28,9 +28,6 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-{% if postfix_smtpd_relay_restrictions is defined %}
-smtpd_relay_restrictions = {{ postfix_smtpd_relay_restrictions | join(', ') }}
-{% endif %}
 myhostname = {{ postfix_hostname }}
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
@@ -50,11 +47,8 @@ recipient_delimiter = +
 inet_interfaces = {{ postfix_inet_interfaces }}
 inet_protocols = {{ postfix_inet_protocols }}
 
-{% if postfix_relayhost is defined %}
+{% if postfix_relayhost %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
-{% else %}
-relayhost =
-{% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
@@ -68,6 +62,13 @@ smtp_tls_note_starttls_offer = yes
 {% if postfix_smtp_tls_cafile is defined %}
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}
+{% endif %}
+{% else %}
+relayhost =
+{% endif %}
+
+{% if postfix_smtpd_relay_restrictions is defined %}
+smtpd_relay_restrictions = {{ postfix_smtpd_relay_restrictions | join(', ') }}
 {% endif %}
 
 message_size_limit = {{  postfix_message_size_limit }}

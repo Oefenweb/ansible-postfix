@@ -40,6 +40,9 @@ sender_canonical_maps = hash:/etc/postfix/sender_canonical_maps
 {% if postfix_generic %}
 smtp_generic_maps = hash:/etc/postfix/generic
 {% endif %}
+{% if postfix_header_checks is defined %}
+smtp_header_checks = regexp:/etc/postfix/header_checks
+{% endif %}
 mydestination = {{ postfix_mydestination | join(', ') }}
 mynetworks = {{ postfix_mynetworks | join(' ') }}
 mailbox_size_limit = 0

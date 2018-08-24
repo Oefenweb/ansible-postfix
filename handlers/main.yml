@@ -15,6 +15,9 @@
 - name: postmap generic
   command: postmap hash:/etc/postfix/generic
 
+- name: postmap header_checks
+  command: postmap hash:/etc/postfix/header_checks
+
 - name: restart postfix
   command: /bin/true
   notify:

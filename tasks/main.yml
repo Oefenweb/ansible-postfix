@@ -151,6 +151,23 @@
     - postfix
     - postfix-generic-table
 
+- name: configure header checks
+  template:
+    src: etc/postfix/header_checks.j2
+    dest: /etc/postfix/header_checks
+    owner: root
+    group: root
+    mode: 0644
+  when: postfix_header_checks is defined
+  with_items: "{{ postfix_header_checks }}"
+  notify:
+    - postmap header_checks
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-header-checks-table
+
 - name: start and enable service
   service:
     name: postfix

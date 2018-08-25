@@ -13,6 +13,7 @@ None
  * `postfix_install` [default: `[postfix, mailutils, libsasl2-2, sasl2-bin, libsasl2-modules]`]: Packages to install
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
+ * `postfix_default_database_type` [default: `hash`]: Postfix default database type that supports postmap / postalias ([see](http://www.postfix.org/DATABASE_README.html#types) and [see](http://www.postfix.org/postconf.5.html#default_database_type)) 
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_canonical_maps))

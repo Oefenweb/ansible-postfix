@@ -29,16 +29,17 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # information on enabling SSL in the smtp client.
 
 myhostname = {{ postfix_hostname }}
-alias_maps = hash:/etc/aliases
-alias_database = hash:/etc/aliases
+default_database_type = {{ postfix_default_database_type }}
+alias_maps = {{ postfix_default_database_type }}:/etc/aliases
+alias_database = {{ postfix_default_database_type }}:/etc/aliases
 {% if postfix_virtual_aliases %}
-virtual_alias_maps = hash:/etc/postfix/virtual
+virtual_alias_maps = {{ postfix_default_database_type }}:/etc/postfix/virtual
 {% endif %}
 {% if postfix_sender_canonical_maps %}
-sender_canonical_maps = hash:/etc/postfix/sender_canonical_maps
+sender_canonical_maps = {{ postfix_default_database_type }}:/etc/postfix/sender_canonical_maps
 {% endif %}
 {% if postfix_generic %}
-smtp_generic_maps = hash:/etc/postfix/generic
+smtp_generic_maps = {{ postfix_default_database_type }}:/etc/postfix/generic
 {% endif %}
 {% if postfix_header_checks is defined %}
 smtp_header_checks = {{ postifx_header_check_format }}:/etc/postfix/header_checks
@@ -54,7 +55,7 @@ inet_protocols = {{ postfix_inet_protocols }}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
-smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_password_maps = {{ postfix_default_database_type }}:/etc/postfix/sasl_passwd
 smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% endif %}

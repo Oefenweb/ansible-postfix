@@ -1,11 +1,19 @@
 # defaults file for postfix
 ---
-postfix_install:
+
+postfix_debian_install:
   - postfix
   - mailutils
   - libsasl2-2
   - sasl2-bin
   - libsasl2-modules
+postfix_redhat_install:
+  - postfix
+  - mailx
+  - cyrus-sasl
+  - cyrus-sasl-lib
+  - libselinux-python
+
 postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
 postfix_aliases: []
@@ -31,6 +39,6 @@ postfix_mynetworks:
   - 127.0.0.0/8
   - '[::ffff:127.0.0.0]/104'
   - '[::1]/128'
-postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
+postfix_smtpd_banner: '$myhostname ESMTP $mail_name ({{ ansible_os_family }})'
 postfix_disable_vrfy_command: false
 postfix_message_size_limit: 10240000

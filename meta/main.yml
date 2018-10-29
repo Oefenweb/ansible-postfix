@@ -3,7 +3,7 @@
 galaxy_info:
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
-  description: Set up a postfix server in Debian-like systems
+  description: Set up a postfix server
   license: MIT
   min_ansible_version: 2.2.0.0
   platforms:
@@ -18,6 +18,9 @@ galaxy_info:
         - wheezy
         - jessie
         - stretch
+    - name: EL
+      versions:
+        - 7
   galaxy_tags:
     - system
     - web

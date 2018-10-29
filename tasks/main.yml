@@ -19,13 +19,12 @@
     - configuration
     - postfix
     - postfix-install
+  when: ansible_os_family == "Debian"
 
 - name: install package
-  apt:
-    name: "{{ postfix_install }}"
-    state: "{{ apt_install_state | default('latest') }}"
-    update_cache: true
-    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  package:
+    name: "{{ postfix_install|default(vars['postfix_' + ansible_os_family.lower() + '_install']) }}"
+    state: "{{ package_install_state | default('latest') }}"
   tags:
     - configuration
     - postfix

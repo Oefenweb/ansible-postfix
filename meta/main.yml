@@ -1,6 +1,7 @@
 # meta file for postfix
 ---
 galaxy_info:
+  role_name: postfix
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up a postfix server in Debian-like systems

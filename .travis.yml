@@ -7,8 +7,10 @@ python: "2.7"
 
 env:
   - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.7.2
   - ANSIBLE_VERSION=2.7.1
   - ANSIBLE_VERSION=2.7.0
+  - ANSIBLE_VERSION=2.6.8
   - ANSIBLE_VERSION=2.6.7
   - ANSIBLE_VERSION=2.6.6
   - ANSIBLE_VERSION=2.6.5
@@ -59,7 +61,7 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml || true; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml; fi
 
 notifications:
   email: false

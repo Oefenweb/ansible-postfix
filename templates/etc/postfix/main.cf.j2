@@ -41,6 +41,9 @@ sender_canonical_maps = {{ postfix_default_database_type }}:/etc/postfix/sender_
 {% if postfix_generic %}
 smtp_generic_maps = {{ postfix_default_database_type }}:/etc/postfix/generic
 {% endif %}
+{% if postfix_header_checks is defined %}
+smtp_header_checks = {{ postifx_header_check_format }}:/etc/postfix/header_checks
+{% endif %}
 mydestination = {{ postfix_mydestination | join(', ') }}
 mynetworks = {{ postfix_mynetworks | join(' ') }}
 mailbox_size_limit = 0

@@ -37,6 +37,9 @@ virtual_alias_maps = hash:/etc/postfix/virtual
 {% if postfix_sender_canonical_maps %}
 sender_canonical_maps = hash:/etc/postfix/sender_canonical_maps
 {% endif %}
+{% if postfix_recipient_canonical_maps %}
+recipient_canonical_maps = {{ postfix_default_database_type }}:/etc/postfix/recipient_canonical_maps
+{% endif %}
 {% if postfix_generic %}
 smtp_generic_maps = hash:/etc/postfix/generic
 {% endif %}

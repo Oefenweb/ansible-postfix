@@ -131,6 +131,25 @@
     - postfix
     - postfix-sender-canonical-maps
 
+- name: configure recipient canonical maps
+  lineinfile:
+    dest: /etc/postfix/recipient_canonical_maps
+    regexp: '^{{ item.recipient }}.*'
+    line: '{{ item.recipient }} {{ item.rewrite }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  with_items: "{{ postfix_recipient_canonical_maps }}"
+  notify:
+    - postmap recipient_canonical_maps
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-recipient-canonical-maps
+
 - name: configure generic table
   lineinfile:
     dest: /etc/postfix/generic

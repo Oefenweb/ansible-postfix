@@ -29,6 +29,7 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # information on enabling SSL in the smtp client.
 
 myhostname = {{ postfix_hostname }}
+default_database_type = {{ postfix_default_database_type }}
 alias_maps = {{ postfix_default_database_type }}:/etc/aliases
 alias_database = {{ postfix_default_database_type }}:/etc/aliases
 {% if postfix_virtual_aliases %}

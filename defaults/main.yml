@@ -34,3 +34,4 @@ postfix_mynetworks:
 postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
 postfix_disable_vrfy_command: false
 postfix_message_size_limit: 10240000
+postfix_default_database_type: hash

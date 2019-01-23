@@ -7,12 +7,14 @@ python: "2.7"
 
 env:
   - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.7.6
   - ANSIBLE_VERSION=2.7.5
   - ANSIBLE_VERSION=2.7.4
   - ANSIBLE_VERSION=2.7.3
   - ANSIBLE_VERSION=2.7.2
   - ANSIBLE_VERSION=2.7.1
   - ANSIBLE_VERSION=2.7.0
+  - ANSIBLE_VERSION=2.6.12
   - ANSIBLE_VERSION=2.6.11
   - ANSIBLE_VERSION=2.6.10
   - ANSIBLE_VERSION=2.6.9
@@ -78,3 +80,6 @@ notifications:
     rooms:
       secure: E9GE0YbNAi2h0IqmkxDS7SE4WI8yGnQc97djppJ147sOZHbifup5ELLJcMNJFKKLG60fCEgKLc/QgukcofeKHv+xPH0vaI4B7x98l5x19D6TPIYOgpmlzUPMtA2R5VfNa3aql+IynHhFxI0GxwhIaiyRaMjt+yzcgKYOvzw++8E=
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  slack:
+    rooms:
+      secure: "U+eNXkGDBtGw6x0f5v80/TCdk5vV0+8n3wHJ0wiXJjUcb+xavkXD66tqy5cdud+bVzlU2jVxutZGLjdwzYo7cshW/blT4qrz2kg4QaSENxZjIlzed0WEg+xRLetUp6yBVSML/1K7uEBKrQcP44H3EkLf1knCtN1o2Im4ORL+vT8="

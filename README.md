@@ -35,7 +35,7 @@ None
  * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
- * `postfix_main_raw_options` [optional]: Literal YAML block to pass extra config items to add to main.cf
+ * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
 
 ## Dependencies
 
@@ -162,7 +162,8 @@ A simple example that shows how to add some raw config:
   roles:
     - postfix
   vars:
-    postfix_main_raw_options: |
+    postfix_raw_options:
+      - |
         milter_default_action = accept
         milter_protocol = 6
         smtpd_milters = unix:opendkim/opendkim.sock unix:opendmarc/opendmarc.sock unix:spamass/spamass.sock unix:clamav/clamav-milter.ctl

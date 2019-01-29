@@ -76,7 +76,6 @@ message_size_limit = {{  postfix_message_size_limit }}
 # Disable the SMTP VRFY command. This stops some techniques used to harvest email addresses.
 disable_vrfy_command = {{ postfix_disable_vrfy_command | bool | ternary('yes', 'no') }}
 
-{% if postfix_main_raw_options is defined %}
-{{ postfix_main_raw_options }}
-{% endif %}
-
+{% for raw_option in postfix_raw_options | default([]) %}
+{{ raw_option }}
+{% endfor %}

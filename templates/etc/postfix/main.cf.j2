@@ -44,8 +44,16 @@ mydestination = {{ postfix_mydestination | join(', ') }}
 mynetworks = {{ postfix_mynetworks | join(' ') }}
 mailbox_size_limit = 0
 recipient_delimiter = +
+{% if postfix_inet_interfaces is string %}
 inet_interfaces = {{ postfix_inet_interfaces }}
+{% else %}
+inet_interfaces = {{ postfix_inet_interfaces | join(', ') }}
+{% endif %}
+{% if postfix_inet_protocols is string %}
 inet_protocols = {{ postfix_inet_protocols }}
+{% else %}
+inet_protocols = {{ postfix_inet_protocols | join(', ') }}
+{% endif %}
 
 {% if postfix_relayhost %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}

@@ -13,7 +13,7 @@
   command: postmap hash:/etc/postfix/sender_canonical_maps
 
 - name: postmap recipient_canonical_maps
-  command: postmap {{ postfix_default_database_type }}:/etc/postfix/recipient_canonical_maps
+  command: postmap hash:/etc/postfix/recipient_canonical_maps
 
 - name: postmap generic
   command: postmap hash:/etc/postfix/generic

@@ -60,7 +60,7 @@
 - name: configure sasl username/password
   template:
     src: etc/postfix/sasl_passwd.j2
-    dest: /etc/postfix/sasl_passwd
+    dest: "{{ postfix_sasl_passwd_file }}"
     owner: root
     group: root
     mode: 0600
@@ -76,7 +76,7 @@
 
 - name: configure aliases
   lineinfile:
-    dest: /etc/aliases
+    dest: "{{ postfix_aliases_file }}"
     regexp: '^{{ item.user }}:.*'
     line: '{{ item.user }}: {{ item.alias }}'
     owner: root
@@ -95,7 +95,7 @@
 
 - name: configure virtual aliases
   lineinfile:
-    dest: /etc/postfix/virtual
+    dest: "{{ postfix_virtual_aliases_file }}"
     regexp: '^{{ item.virtual }}.*'
     line: '{{ item.virtual }} {{ item.alias }}'
     owner: root
@@ -114,7 +114,7 @@
 
 - name: configure sender canonical maps
   lineinfile:
-    dest: /etc/postfix/sender_canonical_maps
+    dest: "{{ postfix_sender_canonical_maps_file }}"
     regexp: '^{{ item.sender }}.*'
     line: '{{ item.sender }} {{ item.rewrite }}'
     owner: root
@@ -133,7 +133,7 @@
 
 - name: configure recipient canonical maps
   lineinfile:
-    dest: /etc/postfix/recipient_canonical_maps
+    dest: "{{ postfix_recipient_canonical_maps_file }}"
     regexp: '^{{ item.recipient }}.*'
     line: '{{ item.recipient }} {{ item.rewrite }}'
     owner: root
@@ -152,7 +152,7 @@
 
 - name: configure generic table
   lineinfile:
-    dest: /etc/postfix/generic
+    dest: "{{ postfix_generic_file }}"
     regexp: '^{{ item.pattern }}.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root

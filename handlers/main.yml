@@ -4,19 +4,24 @@
   command: newaliases
 
 - name: new virtual aliases
-  command: postmap hash:/etc/postfix/virtual
+  command: >
+    postmap hash:{{ postfix_virtual_aliases_file }}
 
 - name: postmap sasl_passwd
-  command: postmap hash:/etc/postfix/sasl_passwd
+  command: >
+    postmap hash:{{ postfix_sasl_passwd_file }}
 
 - name: postmap sender_canonical_maps
-  command: postmap hash:/etc/postfix/sender_canonical_maps
+  command: >
+    postmap hash:{{ postfix_sender_canonical_maps_file }}
 
 - name: postmap recipient_canonical_maps
-  command: postmap hash:/etc/postfix/recipient_canonical_maps
+  command: >
+    postmap hash:{{ postfix_recipient_canonical_maps_file }}
 
 - name: postmap generic
-  command: postmap hash:/etc/postfix/generic
+  command: >
+    postmap hash:{{ postfix_generic_file }}
 
 - name: restart postfix
   command: /bin/true

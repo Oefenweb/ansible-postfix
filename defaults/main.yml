@@ -38,3 +38,6 @@ postfix_disable_vrfy_command: false
 postfix_message_size_limit: 10240000
 postifx_header_checks_database_type: regexp
 postfix_default_database_type: hash
+postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
+postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
+postfix_raw_options: []

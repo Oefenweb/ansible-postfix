@@ -5,3 +5,10 @@ postfix_debconf_selections:
    question: postfix/main_mailer_type
    value: No configuration
    vtype: select
+
+postfix_aliases_file: /etc/aliases
+postfix_virtual_aliases_file: /etc/postfix/virtual
+postfix_sasl_passwd_file: /etc/postfix/sasl_passwd
+postfix_sender_canonical_maps_file: /etc/postfix/recipient_canonical_maps
+postfix_recipient_canonical_maps_file: /etc/postfix/sender_canonical_maps
+postfix_generic_file: /etc/postfix/generic

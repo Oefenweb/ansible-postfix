@@ -17,6 +17,7 @@ None
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_canonical_maps))
  * `postfix_recipient_canonical_maps` [default: `[]`]: Recipient address rewriting in `/etc/postfix/recipient_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
+ * `postfix_header_checks` [default: `[]`]: Lookup tables for content inspection of primary non-MIME message headers `/etc/postfix/header_checks` ([see](http://www.postfix.org/postconf.5.html#header_checks))
  * `postfix_generic:` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
  * `postfix_mydestination` [default: `["{{ postfix_hostname }}", 'localdomain', 'localhost', 'localhost.localdomain']`]: Specifies what domains this machine will deliver locally, instead of forwarding to another machine
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
@@ -34,6 +35,9 @@ None
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
  * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
+ * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
+ * `postifx_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
+ * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)

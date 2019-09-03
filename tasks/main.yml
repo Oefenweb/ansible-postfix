@@ -97,7 +97,7 @@
   stat:
     path: "{{ postfix_aliases_file }}.db"
   register: aliasesdb
-  changed_when: "aliasesdb.stat.exists == False"
+  changed_when: not aliasesdb.stat.exists
   when: postfix_default_database_type == "hash"
   notify:
     - new aliases

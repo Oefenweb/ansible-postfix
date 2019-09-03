@@ -8,6 +8,7 @@ postfix_install:
   - libsasl2-modules
 postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
+postfix_config_compatibility: 2
 postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []

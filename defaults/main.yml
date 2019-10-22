@@ -12,6 +12,8 @@ postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
 postfix_recipient_canonical_maps: []
+postfix_transport_maps: []
+postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
 postfix_generic: []
 postfix_relayhost: false

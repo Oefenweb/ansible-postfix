@@ -15,6 +15,12 @@
 - name: postmap recipient_canonical_maps
   command: postmap {{ postfix_default_database_type }}:{{ postfix_recipient_canonical_maps_file }}
 
+- name: postmap transport_maps
+  command: postmap {{ postfix_default_database_type }}:{{ postfix_transport_maps_file }}
+
+- name: postmap sender_dependent_relayhost_maps
+  command: postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
+
 - name: postmap generic
   command: postmap {{ postfix_default_database_type }}:{{ postfix_generic_file }}
 

@@ -167,7 +167,7 @@
 - name: configure transport maps
   lineinfile:
     dest: "{{ postfix_transport_maps_file }}"
-    regexp: '^{{ item.pattern }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -186,7 +186,7 @@
 - name: configure sender dependent relayhost maps
   lineinfile:
     dest: "{{ postfix_sender_dependent_relayhost_maps_file }}"
-    regexp: '^{{ item.pattern }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root

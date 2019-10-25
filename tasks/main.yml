@@ -77,7 +77,7 @@
 - name: configure aliases
   lineinfile:
     dest: "{{ postfix_aliases_file }}"
-    regexp: '^{{ item.user }}:.*'
+    regexp: '^{{ item.user | regex_escape }}.*'
     line: '{{ item.user }}: {{ item.alias }}'
     owner: root
     group: root
@@ -110,7 +110,7 @@
 - name: configure virtual aliases
   lineinfile:
     dest: "{{ postfix_virtual_aliases_file }}"
-    regexp: '^{{ item.virtual }}.*'
+    regexp: '^{{ item.virtual | regex_escape }}.*'
     line: '{{ item.virtual }} {{ item.alias }}'
     owner: root
     group: root
@@ -129,7 +129,7 @@
 - name: configure sender canonical maps
   lineinfile:
     dest: "{{ postfix_sender_canonical_maps_file }}"
-    regexp: '^{{ item.sender }}.*'
+    regexp: '^{{ item.sender | regex_escape }}.*'
     line: '{{ item.sender }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -148,7 +148,7 @@
 - name: configure recipient canonical maps
   lineinfile:
     dest: "{{ postfix_recipient_canonical_maps_file }}"
-    regexp: '^{{ item.recipient }}.*'
+    regexp: '^{{ item.recipient | regex_escape }}.*'
     line: '{{ item.recipient }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -164,10 +164,48 @@
     - postfix
     - postfix-recipient-canonical-maps
 
+- name: configure transport maps
+  lineinfile:
+    dest: "{{ postfix_transport_maps_file }}"
+    regexp: '^{{ item.pattern | regex_escape }}.*'
+    line: '{{ item.pattern }} {{ item.result }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  with_items: "{{ postfix_transport_maps }}"
+  notify:
+    - postmap transport_maps
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-transport-maps
+
+- name: configure sender dependent relayhost maps
+  lineinfile:
+    dest: "{{ postfix_sender_dependent_relayhost_maps_file }}"
+    regexp: '^{{ item.pattern | regex_escape }}.*'
+    line: '{{ item.pattern }} {{ item.result }}'
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  with_items: "{{ postfix_sender_dependent_relayhost_maps }}"
+  notify:
+    - postmap sender_dependent_relayhost_maps
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-sender-dependent-relayhost-maps
+
 - name: configure generic table
   lineinfile:
     dest: "{{ postfix_generic_file }}"
-    regexp: '^{{ item.pattern }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -185,8 +223,8 @@
 
 - name: configure header checks
   template:
-    src: etc/postfix/header_checks.j2
-    dest: /etc/postfix/header_checks
+    src: "{{ postfix_header_checks_file.lstrip('/') }}.j2"
+    dest: "{{ postfix_header_checks_file }}"
     owner: root
     group: root
     mode: 0644

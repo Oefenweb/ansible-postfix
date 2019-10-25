@@ -64,8 +64,8 @@
     owner: root
     group: root
     mode: 0600
-  when: postfix_relayhost != false
-  no_log: true
+  when: postfix_relayhost != ""
+  no_log: not {{ansible_check_mode}}
   notify:
     - postmap sasl_passwd
     - restart postfix

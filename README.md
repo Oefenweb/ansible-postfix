@@ -28,6 +28,7 @@ None
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
  * `postfix_sasl_auth_enable` [default: `true`]: Enable SASL authentication in the SMTP client
  * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
+ * `postfix_relayhost_mxlookup` [default: `false` (not using mx lookup)]: Lookup for MX record instead of A record for relayhost
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_smtpd_relay_restrictions` [optional]: List of access restrictions for mail relay control ([see](http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions))
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
@@ -111,6 +112,21 @@ Provide the relay host name if you want to enable relaying:
       - user: root
         alias: you@yourdomain.org
     postfix_relayhost: mail.yourdomain.org
+```
+
+Provide the relay domain name and use MX records if you want to enable relaying to DNS MX records of a domain:
+
+```yaml
+---
+- hosts: all
+  roles:
+    - postfix
+  vars:
+    postfix_aliases:
+      - user: root
+        alias: you@yourdomain.org
+    postfix_relayhost: yourdomain.org
+    postfix_relayhost_mxlookup: true
 ```
 
 Conditional relaying:

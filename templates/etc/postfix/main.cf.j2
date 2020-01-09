@@ -72,7 +72,11 @@ inet_protocols = {{ postfix_inet_protocols | join(', ') }}
 {% endif %}
 
 {% if postfix_relayhost %}
+{% if postfix_relayhost_mxlookup %}
+relayhost = {{ postfix_relayhost }}:{{ postfix_relayhost_port }}
+{% else %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
+{% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
 smtp_sasl_password_maps = {{ postfix_default_database_type }}:/etc/postfix/sasl_passwd

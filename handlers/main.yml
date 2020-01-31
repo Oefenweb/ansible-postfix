@@ -24,20 +24,16 @@
 - name: postmap generic
   command: postmap {{ postfix_default_database_type }}:{{ postfix_generic_file }}
 
-- name: restart postfix
-  command: /bin/true
-  notify:
-    - remove pid
-    - restart service
-
 - name: remove pid
   file:
     path: "~postfix/pid/master.pid"
     state: absent
+  listen: restart postfix
   when: is_docker_guest
 
 - name: restart service
   service:
     name: postfix
     state: restarted
+  listen: restart postfix
   when: service_default_state | default('started') == 'started'

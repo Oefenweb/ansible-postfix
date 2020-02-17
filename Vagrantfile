@@ -30,7 +30,7 @@ boxes = [
     :box => "bento/ubuntu-18.04",
     :ip => '10.0.0.14',
     :cpu => "50",
-    :ram => "256"
+    :ram => "384"
   },
   {
     :name => "debian-7",

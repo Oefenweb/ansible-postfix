@@ -25,6 +25,7 @@ postfix_sasl_user: "postmaster@{{ ansible_domain }}"
 postfix_sasl_password: 'k8+haga4@#pR'
 postfix_sasl_security_options: noanonymous
 postfix_sasl_mechanism_filter: ''
+postfix_smtp_tls_security_level: may
 postfix_inet_interfaces: all
 postfix_inet_protocols: all
 postfix_mydestination:

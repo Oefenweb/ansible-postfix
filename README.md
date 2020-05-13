@@ -32,6 +32,7 @@ None
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_smtpd_relay_restrictions` [optional]: List of access restrictions for mail relay control ([see](http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions))
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
+ * `postfix_sasl_tls_security_option` [default: `noanonymous`]: SMTP client SASL TLS security options
  * `postfix_sasl_mechanism_filter` [default: `''`]: SMTP client SASL authentication mechanism filter ([see](http://www.postfix.org/postconf.5.html#smtp_sasl_mechanism_filter))
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)

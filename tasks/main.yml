@@ -233,6 +233,20 @@
     - postfix
     - postfix-header-checks-table
 
+- name: configure master.cf
+  template:
+    src: templates/etc/postfix/master.cf.j2
+    dest: /etc/postfix/master.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-master
+
 - name: start and enable service
   service:
     name: postfix

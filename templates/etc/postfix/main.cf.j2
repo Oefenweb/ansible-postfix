@@ -5,7 +5,7 @@
 # Debian specific:  Specifying a file name will cause the first
 # line of that file to be used as the name.  The Debian default
 # is /etc/mailname.
-myorigin = /etc/mailname
+myorigin = {{ postfix_mailname_file }}
 
 smtpd_banner = {{ postfix_smtpd_banner }}
 biff = no
@@ -30,25 +30,28 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 myhostname = {{ postfix_hostname }}
 default_database_type = {{ postfix_default_database_type }}
-alias_maps = {{ postfix_default_database_type }}:/etc/aliases
-alias_database = {{ postfix_default_database_type }}:/etc/aliases
+alias_maps = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
+alias_database = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
 {% if postfix_virtual_aliases %}
-virtual_alias_maps = {{ postfix_default_database_type }}:/etc/postfix/virtual
+virtual_alias_maps = {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
 {% endif %}
 {% if postfix_sender_canonical_maps %}
-sender_canonical_maps = {{ postfix_default_database_type }}:/etc/postfix/sender_canonical_maps
+sender_canonical_maps = {{ postfix_default_database_type }}:{{ postfix_sender_canonical_maps_file }}
 {% endif %}
 {% if postfix_recipient_canonical_maps %}
-recipient_canonical_maps = {{ postfix_default_database_type }}:/etc/postfix/recipient_canonical_maps
+recipient_canonical_maps = {{ postfix_default_database_type }}:{{ postfix_recipient_canonical_maps_file }}
 {% endif %}
-{% if postfix_recipient_canonical_maps %}
-recipient_canonical_maps = hash:/etc/postfix/recipient_canonical_maps
+{% if postfix_transport_maps %}
+transport_maps = {{ postfix_default_database_type }}:{{ postfix_transport_maps_file }}
+{% endif %}
+{% if postfix_sender_dependent_relayhost_maps %}
+sender_dependent_relayhost_maps = {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
 {% endif %}
 {% if postfix_generic %}
-smtp_generic_maps = {{ postfix_default_database_type }}:/etc/postfix/generic
+smtp_generic_maps = {{ postfix_default_database_type }}:{{ postfix_generic_file }}
 {% endif %}
 {% if postfix_header_checks %}
-smtp_header_checks = {{ postifx_header_checks_database_type }}:/etc/postfix/header_checks
+smtp_header_checks = {{ postifx_header_checks_database_type }}:{{ postfix_header_checks_file }}
 {% endif %}
 mydestination = {{ postfix_mydestination | join(', ') }}
 mynetworks = {{ postfix_mynetworks | join(' ') }}
@@ -66,11 +69,16 @@ inet_protocols = {{ postfix_inet_protocols | join(', ') }}
 {% endif %}
 
 {% if postfix_relayhost %}
+{% if postfix_relayhost_mxlookup %}
+relayhost = {{ postfix_relayhost }}:{{ postfix_relayhost_port }}
+{% else %}
 relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
+{% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
 smtp_sasl_password_maps = {{ postfix_default_database_type }}:/etc/postfix/sasl_passwd
 smtp_sasl_security_options = {{ postfix_sasl_security_options }}
+smtp_sasl_tls_security_options = {{ postfix_sasl_tls_security_options }}
 smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% endif %}
 {% if postfix_relaytls %}

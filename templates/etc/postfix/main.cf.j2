@@ -25,8 +25,6 @@ smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
-smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
-
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
@@ -83,9 +81,9 @@ smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% endif %}
 {% if postfix_relaytls %}
-smtp_use_tls = yes
-smtp_tls_security_level = encrypt
-smtp_tls_note_starttls_offer = yes
+smtp_use_tls = {{ postfix_smtp_tls_security_level != 'none' | ternary('yes', 'no')}}
+smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
+smtp_tls_note_starttls_offer = {{ postfix_smtp_tls_note_starttls_offer | bool | ternary('yes', 'no') }}
 {% if postfix_smtp_tls_cafile is defined %}
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}

@@ -10,11 +10,14 @@
 # service type  private unpriv  chroot  wakeup  maxproc command + args
 #               (yes)   (yes)   (no)    (never) (100)
 # ==========================================================================
+{% if postfix_use_postscreen %}
+smtp      inet  n       -       y       -       1       postscreen
+dnsblog   unix  -       -       y       -       0       dnsblog
+tlsproxy  unix  -       -       y       -       0       tlsproxy
+smtpd     pass  -       -       y       -       -       smtpd
+{% else %}
 smtp      inet  n       -       y       -       -       smtpd
-#smtp      inet  n       -       y       -       1       postscreen
-#smtpd     pass  -       -       y       -       -       smtpd
-#dnsblog   unix  -       -       y       -       0       dnsblog
-#tlsproxy  unix  -       -       y       -       0       tlsproxy
+{% endif %}
 #submission inet n       -       y       -       -       smtpd
 #  -o syslog_name=postfix/submission
 #  -o smtpd_tls_security_level=encrypt

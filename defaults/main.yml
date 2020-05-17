@@ -45,4 +45,5 @@ postfix_default_database_type: hash
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
 postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
 postfix_use_postscreen: false
+postfix_postscreen_dnsbl_sites: []
 postfix_raw_options: []

@@ -47,6 +47,7 @@ None
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
  * `postfix_use_postscreen` [default: `false`]: Whether to use `postscreen(8)` on port 25 instead of `smtpd(8)` for [additional protection](http://www.postfix.org/POSTSCREEN_README.html).
+ * `postfix_postscreen_dnsbl_sites:` [default: `[]`]: List of DNSBL sites that `postscreen(8)` will use.
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
 
 ## Dependencies

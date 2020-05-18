@@ -75,16 +75,12 @@
     - postfix-sasl-passwd
 
 - name: configure aliases
-  lineinfile:
+  template:
+    src: etc/aliases.j2
     dest: "{{ postfix_aliases_file }}"
-    regexp: '^{{ item.user | regex_escape }}.*'
-    line: '{{ item.user }}: {{ item.alias }}'
     owner: root
     group: root
     mode: 0644
-    create: true
-    state: present
-  with_items: "{{ postfix_aliases }}"
   notify:
     - new aliases
     - restart postfix

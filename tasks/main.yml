@@ -33,8 +33,8 @@
 
 - name: configure mailname
   template:
-    src: etc/mailname.j2
-    dest: /etc/mailname
+    src: "{{ postfix_mailname_file.lstrip('/') }}.j2"
+    dest: "{{ postfix_mailname_file }}"
     owner: root
     group: root
     mode: 0644
@@ -46,8 +46,8 @@
 
 - name: update configuration file
   template:
-    src: etc/postfix/main.cf.j2
-    dest: /etc/postfix/main.cf
+    src: "{{ postfix_main_cf.lstrip('/') }}.j2"
+    dest: "{{ postfix_main_cf }}"
     owner: root
     group: root
     mode: 0644
@@ -59,7 +59,7 @@
 
 - name: configure sasl username/password
   template:
-    src: etc/postfix/sasl_passwd.j2
+    src: "{{ postfix_sasl_passwd_file.lstrip('/') }}.j2"
     dest: "{{ postfix_sasl_passwd_file }}"
     owner: root
     group: root
@@ -76,7 +76,7 @@
 
 - name: configure aliases
   template:
-    src: etc/aliases.j2
+    src: "{{ postfix_aliases_file.lstrip('/') }}.j2"
     dest: "{{ postfix_aliases_file }}"
     owner: root
     group: root

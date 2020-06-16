@@ -6,6 +6,7 @@ postfix_debconf_selections:
    value: No configuration
    vtype: select
 
+postfix_main_cf: /etc/postfix/main.cf
 postfix_mailname_file: /etc/mailname
 postfix_aliases_file: /etc/aliases
 postfix_virtual_aliases_file: /etc/postfix/virtual

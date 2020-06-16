@@ -16,7 +16,7 @@ postfix_transport_maps: []
 postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
 postfix_generic: []
-postfix_relayhost: false
+postfix_relayhost: ''
 postfix_relayhost_mxlookup: false
 postfix_relayhost_port: 587
 postfix_relaytls: false

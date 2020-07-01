@@ -36,7 +36,7 @@ alias_database = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
 virtual_alias_maps = {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
 {% endif %}
 {% if postfix_sender_canonical_maps %}
-sender_canonical_maps = {{ postfix_default_database_type }}:{{ postfix_sender_canonical_maps_file }}
+sender_canonical_maps = {{ postifx_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
 {% endif %}
 {% if postfix_recipient_canonical_maps %}
 recipient_canonical_maps = {{ postfix_default_database_type }}:{{ postfix_recipient_canonical_maps_file }}

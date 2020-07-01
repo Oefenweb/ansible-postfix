@@ -11,6 +11,7 @@
 
 - name: postmap sender_canonical_maps
   command: postmap {{ postifx_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
+  when: postifx_sender_canonical_maps_database_type != "regexp"
 
 - name: postmap recipient_canonical_maps
   command: postmap {{ postfix_default_database_type }}:{{ postfix_recipient_canonical_maps_file }}

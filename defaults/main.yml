@@ -41,7 +41,7 @@ postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
 postfix_disable_vrfy_command: false
 postfix_message_size_limit: 10240000
 postifx_header_checks_database_type: regexp
-postifx_sender_canonical_maps_database_type: regexp
+postifx_sender_canonical_maps_database_type: ""
 postfix_default_database_type: hash
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
 postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key

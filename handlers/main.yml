@@ -10,7 +10,7 @@
   command: postmap -p {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
 
 - name: postmap sender_canonical_maps
-  command: postmap {{ postifx_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
+  command: postmap {{ postifx_sender_canonical_maps_database_type | default( postfix_default_database_type, true ) }}:{{ postfix_sender_canonical_maps_file }}
   when: postifx_sender_canonical_maps_database_type != "regexp"
 
 - name: postmap recipient_canonical_maps

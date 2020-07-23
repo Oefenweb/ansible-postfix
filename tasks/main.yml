@@ -7,7 +7,6 @@
     - configuration
     - postfix
     - postfix-facts
-  when: ansible_os_family == "Debian"
 
 - name: configure debconf
   debconf:
@@ -20,6 +19,7 @@
     - configuration
     - postfix
     - postfix-install
+  when: ansible_os_family == "Debian"
 
 - name: install package
   package:

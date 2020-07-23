@@ -1,6 +1,6 @@
 # defaults file for postfix
 ---
-postfix_install:
+postfix_debian_install:
   - postfix
   - mailutils
   - libsasl2-2

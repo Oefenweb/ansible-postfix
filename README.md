@@ -41,7 +41,7 @@ None
  * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
  * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
- * `postifx_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
+ * `postfix_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
  * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file

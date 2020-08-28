@@ -65,8 +65,8 @@
     group: root
     mode: 0600
   when:
-    - postfix_sasl_auth_enable | bool
     - postfix_relayhost | length
+    - postfix_sasl_auth_enable | bool
   no_log: not ansible_check_mode
   notify:
     - postmap sasl_passwd

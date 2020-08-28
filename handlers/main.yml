@@ -10,13 +10,13 @@
   command: postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
 
 - name: postmap sender_canonical_maps
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_sender_canonical_maps_file }}
+  command: postmap {{ postfix_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
 
 - name: postmap recipient_canonical_maps
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_recipient_canonical_maps_file }}
+  command: postmap {{ postfix_recipient_canonical_maps_database_type }}:{{ postfix_recipient_canonical_maps_file }}
 
 - name: postmap transport_maps
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_transport_maps_file }}
+  command: postmap {{ postfix_transport_maps_database_type }}:{{ postfix_transport_maps_file }}
 
 - name: postmap sender_dependent_relayhost_maps
   command: postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}

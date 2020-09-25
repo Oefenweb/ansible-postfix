@@ -5,10 +5,11 @@ dist: xenial
 language: python
 python:
   - "2.7"
-  - "3.5"
+  - "3.8"
 
 env:
   - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.9.13
   - ANSIBLE_VERSION=2.9.12
   - ANSIBLE_VERSION=2.9.11
   - ANSIBLE_VERSION=2.9.10
@@ -107,7 +108,7 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ] && [ "$TRAVIS_PYTHON_VERSION" != '2.7' ]; then ansible-lint tests/test.yml; fi
 
 notifications:
   email: false

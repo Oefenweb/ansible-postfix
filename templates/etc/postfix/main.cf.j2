@@ -117,6 +117,10 @@ disable_vrfy_command = {{ postfix_disable_vrfy_command | bool | ternary('yes', '
 postscreen_dnsbl_sites = {{ postfix_postscreen_dnsbl_sites | join(', ') }}
 {% endif %}
 
+{% if postfix_enable_spf_agent %}
+policyd-spf_time_limit = {{ postfix_spf_time_limit }}
+{% endif %}
+
 {% for raw_option in postfix_raw_options | default([]) %}
 {{ raw_option }}
 {% endfor %}

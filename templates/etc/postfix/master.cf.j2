@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for item in postfix_master %}
+{{ item }} {{ postfix_master[item] }}
+{% endfor %}

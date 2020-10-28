@@ -93,11 +93,23 @@ smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 relayhost =
 {% endif %}
 
+{% if postfix_smtpd_client_restrictions is defined %}
+smtpd_client_restrictions = {{ postfix_smtpd_client_restrictions | join(', ') }}
+{% endif %}
+{% if postfix_smtpd_helo_restrictions is defined %}
+smtpd_helo_restrictions = {{ postfix_smtpd_helo_restrictions | join(', ') }}
+{% endif %}
+{% if postfix_smtpd_sender_restrictions is defined %}
+smtpd_sender_restrictions = {{ postfix_smtpd_sender_restrictions | join(', ') }}
+{% endif %}
+{% if postfix_smtpd_recipient_restrictions is defined %}
+smtpd_recipient_restrictions = {{ postfix_smtpd_recipient_restrictions | join(', ') }}
+{% endif %}
 {% if postfix_smtpd_relay_restrictions is defined %}
 smtpd_relay_restrictions = {{ postfix_smtpd_relay_restrictions | join(', ') }}
 {% endif %}
-{% if postfix_smtpd_client_restrictions is defined %}
-smtpd_client_restrictions = {{ postfix_smtpd_client_restrictions | join(', ') }}
+{% if postfix_smtpd_data_restrictions is defined %}
+smtpd_data_restrictions = {{ postfix_smtpd_data_restrictions | join(', ') }}
 {% endif %}
 
 message_size_limit = {{  postfix_message_size_limit }}

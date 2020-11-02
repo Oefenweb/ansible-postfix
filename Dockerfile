@@ -11,7 +11,7 @@ RUN rm -rf $HOME/.cache
 # ansible
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y gcc libffi-dev libssl-dev && \
   apt-get clean
-RUN pip install ansible==2.6.2
+RUN pip install ansible==2.9.14
 RUN rm -rf $HOME/.cache
 
 # provision

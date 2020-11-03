@@ -9,7 +9,6 @@ python:
 
 env:
   - ANSIBLE_VERSION=latest
-  - ANSIBLE_VERSION=2.10.2
   - ANSIBLE_VERSION=2.10.1
   - ANSIBLE_VERSION=2.10.0
   - ANSIBLE_VERSION=2.9.14
@@ -45,6 +44,18 @@ env:
   - ANSIBLE_VERSION=2.8.1
   - ANSIBLE_VERSION=2.8.0
 
+jobs:
+  include:
+    - python: "3.8"
+      env: ANSIBLE_VERSION=latest ANSIBLE_LINT_VERSION=latest
+  exclude:
+    - python: "2.7"
+      env: ANSIBLE_VERSION=latest
+    - python: "2.7"
+      env: ANSIBLE_VERSION=2.10.2
+    - python: "2.7"
+      env: ANSIBLE_VERSION=2.10.1
+
 branches:
   only:
     - master
@@ -58,7 +69,14 @@ before_install:
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
+  - >
+    if [ -n "$ANSIBLE_LINT_VERSION" ]; then
+      if [ "$ANSIBLE_LINT_VERSION" = "latest" ]; then
+        pip install ansible-lint;
+      else
+        pip install ansible-lint==$ANSIBLE_LINT_VERSION;
+      fi
+    fi
 
 script:
   # Check the role/playbook's syntax.
@@ -74,7 +92,10 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml; fi
+  - >
+    if [ -n "$ANSIBLE_LINT_VERSION" ]; then
+      ansible-lint tests/test.yml;
+    fi
 
 notifications:
   email: false

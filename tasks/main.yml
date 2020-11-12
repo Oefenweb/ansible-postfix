@@ -57,6 +57,19 @@
     - postfix
     - postfix-configuration
 
+- name: update mastercf file
+  template:
+    src: "{{ postfix_master_cf.lstrip('/') }}.j2"
+    dest: "{{ postfix_master_cf }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-configuration
+
 - name: configure sasl username/password
   template:
     src: "{{ postfix_sasl_passwd_file.lstrip('/') }}.j2"
@@ -163,16 +176,12 @@
     - postfix-recipient-canonical-maps
 
 - name: configure transport maps
-  lineinfile:
+  template:
     dest: "{{ postfix_transport_maps_file }}"
-    regexp: '^{{ item.pattern | regex_escape }}.*'
-    line: '{{ item.pattern }} {{ item.result }}'
+    src: "{{ postfix_transport_maps_file.lstrip('/') }}.j2"
     owner: root
     group: root
     mode: 0644
-    create: true
-    state: present
-  with_items: "{{ postfix_transport_maps }}"
   notify:
     - postmap transport_maps
     - restart postfix

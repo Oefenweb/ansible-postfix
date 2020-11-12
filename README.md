@@ -47,6 +47,7 @@ None
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
+ * `postfix_master_custom` [default: Debian default master.cf]: Dictionary of master.cf lines with service and type together as key, separated by space
 
 ## Dependencies
 
@@ -227,6 +228,20 @@ A simple example that shows how to add some raw config:
         smtpd_milters = unix:opendkim/opendkim.sock unix:opendmarc/opendmarc.sock unix:spamass/spamass.sock unix:clamav/clamav-milter.ctl
         milter_connect_macros = "i j {daemon_name} v {if_name} _"
         policyd-spf_time_limit = 3600
+```
+
+A simple example that shows how to disable bounce mails with master_custom:
+
+```yaml
+---
+- hosts: all
+  roles:
+    - postfix
+  vars:
+    postfix_master_custom:
+      bounce unix: '- - y - 0 discard'
+      defer unix: '- - y - 0 discard'
+      trace unix: '- - y - 0 discard'
 ```
 
 #### License

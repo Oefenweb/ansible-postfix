@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+{% for transport in postfix_transport_maps %}
+{{ transport.pattern }} {{ transport.result }}
+{% endfor %}
+

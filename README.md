@@ -62,7 +62,7 @@ None
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
 
  * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
- * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
+ * `postfix_disable_vrfy_command` [default: `true`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
 
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file

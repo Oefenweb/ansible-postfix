@@ -54,7 +54,7 @@ postfix_mynetworks:
   - '[::1]/128'
 
 postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
-postfix_disable_vrfy_command: false
+postfix_disable_vrfy_command: true
 postfix_message_size_limit: 10240000
 
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem

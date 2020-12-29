@@ -2,6 +2,7 @@
 ---
 - name: new aliases
   command: newaliases
+  when: postfix_default_database_type != 'regexp'
 
 - name: new virtual aliases
   command: postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}

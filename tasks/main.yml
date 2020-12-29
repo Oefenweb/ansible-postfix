@@ -108,7 +108,7 @@
 - name: configure virtual aliases
   lineinfile:
     dest: "{{ postfix_virtual_aliases_file }}"
-    regexp: '^{{ item.virtual | regex_escape }} .*'
+    regexp: '^{{ item.virtual | regex_escape }}\s.*'
     line: '{{ item.virtual }} {{ item.alias }}'
     owner: root
     group: root
@@ -127,7 +127,7 @@
 - name: configure sender canonical maps
   lineinfile:
     dest: "{{ postfix_sender_canonical_maps_file }}"
-    regexp: '^{{ item.sender | regex_escape }} .*'
+    regexp: '^{{ item.sender | regex_escape }}\s.*'
     line: '{{ item.sender }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -146,7 +146,7 @@
 - name: configure recipient canonical maps
   lineinfile:
     dest: "{{ postfix_recipient_canonical_maps_file }}"
-    regexp: '^{{ item.recipient | regex_escape }} .*'
+    regexp: '^{{ item.recipient | regex_escape }}\s.*'
     line: '{{ item.recipient }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -165,7 +165,7 @@
 - name: configure transport maps
   lineinfile:
     dest: "{{ postfix_transport_maps_file }}"
-    regexp: '^{{ item.pattern | regex_escape }} .*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -184,7 +184,7 @@
 - name: configure sender dependent relayhost maps
   lineinfile:
     dest: "{{ postfix_sender_dependent_relayhost_maps_file }}"
-    regexp: '^{{ item.pattern | regex_escape }} .*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -203,7 +203,7 @@
 - name: configure generic table
   lineinfile:
     dest: "{{ postfix_generic_file }}"
-    regexp: '^{{ item.pattern | regex_escape }} .*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root

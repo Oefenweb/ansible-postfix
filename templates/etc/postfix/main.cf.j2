@@ -25,6 +25,13 @@ smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
+{% if postfix_enable_submission %}
+# SASL authentication from clients
+# XXX: Only implementing dovecot integration
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+{% endif %}
+
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
@@ -116,6 +123,15 @@ message_size_limit = {{  postfix_message_size_limit }}
 
 # Disable the SMTP VRFY command. This stops some techniques used to harvest email addresses.
 disable_vrfy_command = {{ postfix_disable_vrfy_command | bool | ternary('yes', 'no') }}
+
+# Postscreen configurations
+{% if postfix_use_postscreen %}
+postscreen_dnsbl_sites = {{ postfix_postscreen_dnsbl_sites | join(', ') }}
+{% endif %}
+
+{% if postfix_enable_spf_agent %}
+policyd-spf_time_limit = {{ postfix_spf_time_limit }}
+{% endif %}
 
 {% for raw_option in postfix_raw_options | default([]) %}
 {{ raw_option }}

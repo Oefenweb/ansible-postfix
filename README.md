@@ -53,6 +53,11 @@ None
  * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
+ * `postfix_use_postscreen` [default: `false`]: Whether to use `postscreen(8)` on port 25 instead of `smtpd(8)` for [additional protection](http://www.postfix.org/POSTSCREEN_README.html).
+ * `postfix_postscreen_dnsbl_sites:` [default: `[]`]: List of DNSBL sites that `postscreen(8)` will use.
+ * `postfix_enable_submission` [default: `false`]: Enable TLS-only submission port (587) for authenticated MUAs. Note that you will need to configure the external SASL authentication backend (`See postconf -a`)
+ * `postfix_enable_spf_agent` [default: `false`]: Install and enable SPF policy agent. See [Postfix SMTP Access Policy Delegation](http://www.postfix.org/SMTPD_POLICY_README.html) for furthe information.
+ * `postfix_spf_time_limit` [default: `3600`]: Default time limit to deliver messages to the SPF policy agent
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
 
 ## Dependencies

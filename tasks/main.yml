@@ -31,6 +31,21 @@
     - postfix
     - postfix-install
 
+- name: install SPF policy agent
+  apt:
+    name: "{{ postfix_spf_agent_install }}"
+  tags:
+    - configuration
+    - postfix
+    - postfix-install
+  when: postfix_enable_spf_agent
+
+- name: add SPF policy service
+  set_fact:
+    postfix_smtpd_relay_restrictions: "{{ postfix_smtpd_relay_restrictions + [ 'check_policy_service unix:private/policyd-spf' ] }}"
+  when: postfix_enable_spf_agent
+
+
 - name: configure mailname
   template:
     src: "{{ postfix_mailname_file.lstrip('/') }}.j2"
@@ -232,6 +247,20 @@
     - configuration
     - postfix
     - postfix-header-checks-table
+
+- name: configure master.cf
+  template:
+    src: templates/etc/postfix/master.cf.j2
+    dest: /etc/postfix/master.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart postfix
+  tags:
+    - configuration
+    - postfix
+    - postfix-master
 
 - name: start and enable service
   service:

@@ -47,4 +47,12 @@ postfix_header_checks_database_type: regexp
 postfix_default_database_type: hash
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
 postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key
+postfix_use_postscreen: false
+postfix_postscreen_dnsbl_sites: []
+postfix_enable_submission: false
+postfix_enable_spf_agent: false
+postfix_spf_time_limit: 3600
+postfix_spf_agent_install:
+  - postfix-policyd-spf-python
+
 postfix_raw_options: []

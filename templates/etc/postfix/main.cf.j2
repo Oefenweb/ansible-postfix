@@ -18,6 +18,10 @@ append_dot_mydomain = no
 
 readme_directory = no
 
+{% if postfix_compatibility_level is defined %}
+compatibility_level = {{ postfix_compatibility_level }}
+{% endif %}
+
 # TLS parameters
 smtpd_tls_cert_file={{ postfix_smtpd_tls_cert_file }}
 smtpd_tls_key_file={{ postfix_smtpd_tls_key_file }}

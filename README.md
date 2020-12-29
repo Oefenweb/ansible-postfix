@@ -47,6 +47,7 @@ None
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
+ * `postfix_compatibility_level` [optional]: With backwards compatibility turned on (the compatibility_level value is less than the Postfix built-in value), Postfix looks for settings that are left at their implicit default value, and logs a message when a backwards-compatible default setting is required (e.g. `2`, `Postfix >= 3.0`)
  * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
  * `postfix_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`

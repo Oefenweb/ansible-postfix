@@ -7,7 +7,7 @@
   command: postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
 
 - name: postmap sasl_passwd
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
+  command: postmap -p {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
 
 - name: postmap sender_canonical_maps
   command: postmap {{ postfix_default_database_type }}:{{ postfix_sender_canonical_maps_file }}

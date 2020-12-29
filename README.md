@@ -17,8 +17,11 @@ None
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#transport_maps))
+ * `postfix_sender_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_sender_canonical_maps`
  * `postfix_recipient_canonical_maps` [default: `[]`]: Recipient address rewriting in `/etc/postfix/recipient_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_dependent_relayhost_maps))
+ * `postfix_recipient_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_recipient_canonical_maps`
  * `postfix_transport_maps` [default: `[]`]: Transport mapping based on recipient address `/etc/postfix/transport_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
+ * `postfix_transport_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_transport_maps`
  * `postfix_sender_dependent_relayhost_maps` [default: `[]`]: Transport mapping based on sender address `/etc/postfix/sender_dependent_relayhost_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
  * `postfix_header_checks` [default: `[]`]: Lookup tables for content inspection of primary non-MIME message headers `/etc/postfix/header_checks` ([see](http://www.postfix.org/postconf.5.html#header_checks))
  * `postfix_generic:` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))

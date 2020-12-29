@@ -11,8 +11,11 @@ postfix_mailname: "{{ ansible_fqdn }}"
 postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
+postfix_sender_canonical_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_recipient_canonical_maps: []
+postfix_recipient_canonical_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_transport_maps: []
+postfix_transport_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
 postfix_generic: []

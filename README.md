@@ -15,43 +15,53 @@ None
  * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
  * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
 
+ * `postfix_compatibility_level` [optional]: With backwards compatibility turned on (the compatibility_level value is less than the Postfix built-in value), Postfix looks for settings that are left at their implicit default value, and logs a message when a backwards-compatible default setting is required (e.g. `2`, `Postfix >= 3.0`)
+
+ * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#transport_maps))
+ * `postfix_sender_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_sender_canonical_maps`
  * `postfix_recipient_canonical_maps` [default: `[]`]: Recipient address rewriting in `/etc/postfix/recipient_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#sender_dependent_relayhost_maps))
+ * `postfix_recipient_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_recipient_canonical_maps`
  * `postfix_transport_maps` [default: `[]`]: Transport mapping based on recipient address `/etc/postfix/transport_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
+ * `postfix_transport_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_transport_maps`
  * `postfix_sender_dependent_relayhost_maps` [default: `[]`]: Transport mapping based on sender address `/etc/postfix/sender_dependent_relayhost_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
  * `postfix_header_checks` [default: `[]`]: Lookup tables for content inspection of primary non-MIME message headers `/etc/postfix/header_checks` ([see](http://www.postfix.org/postconf.5.html#header_checks))
- * `postfix_generic:` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
+ * `postfix_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
+ * `postfix_generic` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
 
  * `postfix_mydestination` [default: `["{{ postfix_hostname }}", 'localdomain', 'localhost', 'localhost.localdomain']`]: Specifies what domains this machine will deliver locally, instead of forwarding to another machine
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
 
- * `postfix_relayhost` [default: `false` (no relay host)]: Hostname to relay all email to
+ * `postfix_relayhost` [default: `''` (no relay host)]: Hostname to relay all email to
  * `postfix_relayhost_mxlookup` [default: `false` (not using mx lookup)]: Lookup for MX record instead of A record for relayhost
  * `postfix_relayhost_port` [default: 587]: Relay port (on `postfix_relayhost`, if set)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host
+
+ * `postfix_smtpd_client_restrictions` [optional]: List of client restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_client_restrictions))
+ * `postfix_smtpd_helo_restrictions` [optional]: List of helo restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_helo_restrictions))
+ * `postfix_smtpd_sender_restrictions` [optional]: List of sender restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_sender_restrictions))
+ * `postfix_smtpd_recipient_restrictions` [optional]: List of recipient restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_recipient_restrictions))
+ * `postfix_smtpd_relay_restrictions` [optional]: List of access restrictions for mail relay control ([see](http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions))
+ * `postfix_smtpd_data_restrictions` [optional]: List of data restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_data_restrictions))
 
  * `postfix_sasl_auth_enable` [default: `true`]: Enable SASL authentication in the SMTP client
  * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
+ * `postfix_sasl_tls_security_option` [default: `noanonymous`]: SMTP client SASL TLS security options
  * `postfix_sasl_mechanism_filter` [default: `''`]: SMTP client SASL authentication mechanism filter ([see](http://www.postfix.org/postconf.5.html#smtp_sasl_mechanism_filter))
 
  * `postfix_smtp_tls_security_level` [default: `encrypt`]: The default SMTP TLS security level for the Postfix SMTP client ([see](http://www.postfix.org/postconf.5.html#smtp_tls_security_level))
  * `postfix_smtp_tls_note_starttls_offer` [default: `true`]: Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server ([see](http://www.postfix.org/postconf.5.html#smtp_tls_note_starttls_offer))
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
 
- * `postfix_smtpd_relay_restrictions` [optional]: List of access restrictions for mail relay control ([see](http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions))
-
  * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
  * `postfix_disable_vrfy_command` [default: `false`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
-
- * `postifx_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
- * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
 
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file

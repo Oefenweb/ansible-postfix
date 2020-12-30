@@ -10,16 +10,20 @@ postfix_install:
 postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
 
+postfix_default_database_type: hash
 postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
+postfix_sender_canonical_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_recipient_canonical_maps: []
+postfix_recipient_canonical_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_transport_maps: []
+postfix_transport_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
 postfix_generic: []
 
-postfix_relayhost: false
+postfix_relayhost: ''
 postfix_relayhost_mxlookup: false
 postfix_relayhost_port: 587
 postfix_relaytls: false
@@ -28,6 +32,7 @@ postfix_sasl_auth_enable: true
 postfix_sasl_user: "postmaster@{{ ansible_domain }}"
 postfix_sasl_password: 'k8+haga4@#pR'
 postfix_sasl_security_options: noanonymous
+postfix_sasl_tls_security_options: noanonymous
 postfix_sasl_mechanism_filter: ''
 
 postfix_smtp_tls_security_level: encrypt
@@ -44,12 +49,10 @@ postfix_mynetworks:
   - 127.0.0.0/8
   - '[::ffff:127.0.0.0]/104'
   - '[::1]/128'
+
 postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
 postfix_disable_vrfy_command: false
 postfix_message_size_limit: 10240000
-
-postifx_header_checks_database_type: regexp
-postfix_default_database_type: hash
 
 postfix_smtpd_tls_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
 postfix_smtpd_tls_key_file: /etc/ssl/private/ssl-cert-snakeoil.key

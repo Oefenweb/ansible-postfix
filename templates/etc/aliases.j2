@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+# See man 5 aliases for format
+
+postmaster: root
+{% for alias in postfix_aliases %}
+{{ alias.user }}: {{ alias.alias }}
+{% endfor %}

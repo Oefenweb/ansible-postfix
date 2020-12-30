@@ -33,8 +33,8 @@
 
 - name: configure mailname
   template:
-    src: etc/mailname.j2
-    dest: /etc/mailname
+    src: "{{ postfix_mailname_file.lstrip('/') }}.j2"
+    dest: "{{ postfix_mailname_file }}"
     owner: root
     group: root
     mode: 0644
@@ -46,8 +46,8 @@
 
 - name: update configuration file
   template:
-    src: etc/postfix/main.cf.j2
-    dest: /etc/postfix/main.cf
+    src: "{{ postfix_main_cf.lstrip('/') }}.j2"
+    dest: "{{ postfix_main_cf }}"
     owner: root
     group: root
     mode: 0644
@@ -59,13 +59,15 @@
 
 - name: configure sasl username/password
   template:
-    src: etc/postfix/sasl_passwd.j2
+    src: "{{ postfix_sasl_passwd_file.lstrip('/') }}.j2"
     dest: "{{ postfix_sasl_passwd_file }}"
     owner: root
     group: root
     mode: 0600
-  when: postfix_relayhost != false
-  no_log: true
+  when:
+    - postfix_relayhost | length
+    - postfix_sasl_auth_enable | bool
+  no_log: "{{ not ansible_check_mode }}"
   notify:
     - postmap sasl_passwd
     - restart postfix
@@ -75,16 +77,12 @@
     - postfix-sasl-passwd
 
 - name: configure aliases
-  lineinfile:
+  template:
+    src: "{{ postfix_aliases_file.lstrip('/') }}.j2"
     dest: "{{ postfix_aliases_file }}"
-    regexp: '^{{ item.user | regex_escape }}.*'
-    line: '{{ item.user }}: {{ item.alias }}'
     owner: root
     group: root
     mode: 0644
-    create: true
-    state: present
-  with_items: "{{ postfix_aliases }}"
   notify:
     - new aliases
     - restart postfix
@@ -110,7 +108,7 @@
 - name: configure virtual aliases
   lineinfile:
     dest: "{{ postfix_virtual_aliases_file }}"
-    regexp: '^{{ item.virtual | regex_escape }}.*'
+    regexp: '^{{ item.virtual | regex_escape }}\s.*'
     line: '{{ item.virtual }} {{ item.alias }}'
     owner: root
     group: root
@@ -129,7 +127,7 @@
 - name: configure sender canonical maps
   lineinfile:
     dest: "{{ postfix_sender_canonical_maps_file }}"
-    regexp: '^{{ item.sender | regex_escape }}.*'
+    regexp: '^{{ item.sender | regex_escape }}\s.*'
     line: '{{ item.sender }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -148,7 +146,7 @@
 - name: configure recipient canonical maps
   lineinfile:
     dest: "{{ postfix_recipient_canonical_maps_file }}"
-    regexp: '^{{ item.recipient | regex_escape }}.*'
+    regexp: '^{{ item.recipient | regex_escape }}\s.*'
     line: '{{ item.recipient }} {{ item.rewrite }}'
     owner: root
     group: root
@@ -167,7 +165,7 @@
 - name: configure transport maps
   lineinfile:
     dest: "{{ postfix_transport_maps_file }}"
-    regexp: '^{{ item.pattern | regex_escape }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -186,7 +184,7 @@
 - name: configure sender dependent relayhost maps
   lineinfile:
     dest: "{{ postfix_sender_dependent_relayhost_maps_file }}"
-    regexp: '^{{ item.pattern | regex_escape }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
@@ -205,7 +203,7 @@
 - name: configure generic table
   lineinfile:
     dest: "{{ postfix_generic_file }}"
-    regexp: '^{{ item.pattern | regex_escape }}.*'
+    regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root

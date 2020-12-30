@@ -23,8 +23,8 @@ compatibility_level = {{ postfix_compatibility_level }}
 {% endif %}
 
 # TLS parameters
-smtpd_tls_cert_file={{ postfix_smtpd_tls_cert_file }}
-smtpd_tls_key_file={{ postfix_smtpd_tls_key_file }}
+smtpd_tls_cert_file = {{ postfix_smtpd_tls_cert_file }}
+smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
 smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
@@ -80,15 +80,15 @@ relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
 {% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
-smtp_sasl_password_maps = {{ postfix_default_database_type }}:/etc/postfix/sasl_passwd
+smtp_sasl_password_maps = {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
 smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 smtp_sasl_tls_security_options = {{ postfix_sasl_tls_security_options }}
 smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% endif %}
 {% if postfix_relaytls %}
-smtp_use_tls = yes
-smtp_tls_security_level = encrypt
-smtp_tls_note_starttls_offer = yes
+smtp_use_tls = {{ postfix_relaytls | bool | ternary('yes', 'no') }}
+smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
+smtp_tls_note_starttls_offer = {{ postfix_smtp_tls_note_starttls_offer | bool | ternary('yes', 'no') }}
 {% if postfix_smtp_tls_cafile is defined %}
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}

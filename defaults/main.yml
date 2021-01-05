@@ -11,7 +11,6 @@ postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
 
 postfix_default_database_type: hash
-postfix_header_checks_database_type: regexp
 postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
@@ -22,6 +21,7 @@ postfix_transport_maps: []
 postfix_transport_maps_database_type: "{{ postfix_default_database_type }}"
 postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
+postfix_header_checks_database_type: regexp
 postfix_generic: []
 
 postfix_relayhost: ''

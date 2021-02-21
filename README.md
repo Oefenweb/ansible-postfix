@@ -30,6 +30,7 @@ None
  * `postfix_header_checks` [default: `[]`]: Lookup tables for content inspection of primary non-MIME message headers `/etc/postfix/header_checks` ([see](http://www.postfix.org/postconf.5.html#header_checks))
  * `postfix_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
  * `postfix_generic` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
+ * `postfix_smtp_generic_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `smtp_generic_maps`
 
  * `postfix_mydestination` [default: `["{{ postfix_hostname }}", 'localdomain', 'localhost', 'localhost.localdomain']`]: Specifies what domains this machine will deliver locally, instead of forwarding to another machine
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"

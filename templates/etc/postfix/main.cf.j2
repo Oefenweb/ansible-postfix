@@ -52,7 +52,7 @@ transport_maps = {{ postfix_transport_maps_database_type }}:{{ postfix_transport
 sender_dependent_relayhost_maps = {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
 {% endif %}
 {% if postfix_generic %}
-smtp_generic_maps = {{ postfix_default_database_type }}:{{ postfix_generic_file }}
+smtp_generic_maps = {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_generic_file }}
 {% endif %}
 {% if postfix_header_checks %}
 smtp_header_checks = {{ postfix_header_checks_database_type }}:{{ postfix_header_checks_file }}

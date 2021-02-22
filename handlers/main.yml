@@ -29,7 +29,7 @@
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap generic
-  command: postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_generic_file }}
+  command: postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_smtp_generic_maps_file }}
   when: postfix_smtp_generic_maps_database_type != 'regexp'
 
 - name: remove pid

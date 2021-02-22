@@ -1,0 +1,20 @@
+---
+name: Release
+'on':
+  push:
+    tags:
+      - '*'
+
+jobs:
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Publish to Galaxy
+        uses: robertdebock/galaxy-action@1.1.0
+        with:
+          galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}

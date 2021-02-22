@@ -1,6 +1,6 @@
 ## postfix
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-postfix.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-postfix)
+[![CI](https://github.com/Oefenweb/ansible-postfix/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-postfix/actions?query=workflow%3ACI)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-postfix-blue.svg)](https://galaxy.ansible.com/oefenweb/postfix)
 
 Set up a postfix server in Debian-like systems.
@@ -29,7 +29,8 @@ None
  * `postfix_sender_dependent_relayhost_maps` [default: `[]`]: Transport mapping based on sender address `/etc/postfix/sender_dependent_relayhost_maps` ([see](http://www.postfix.org/postconf.5.html#recipient_canonical_maps))
  * `postfix_header_checks` [default: `[]`]: Lookup tables for content inspection of primary non-MIME message headers `/etc/postfix/header_checks` ([see](http://www.postfix.org/postconf.5.html#header_checks))
  * `postfix_header_checks_database_type` [default: `regexp`]: The database type for use in `header_checks`
- * `postfix_generic` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
+ * `postfix_generic` [default: `postfix_smtp_generic_maps`]: **Deprecated**, use `postfix_smtp_generic_maps`
+ * `postfix_smtp_generic_maps` [default: `[]`]: Generic table address mapping in `/etc/postfix/generic` ([see](http://www.postfix.org/generic.5.html))
  * `postfix_smtp_generic_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `smtp_generic_maps`
 
  * `postfix_mydestination` [default: `["{{ postfix_hostname }}", 'localdomain', 'localhost', 'localhost.localdomain']`]: Specifies what domains this machine will deliver locally, instead of forwarding to another machine

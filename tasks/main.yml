@@ -202,7 +202,7 @@
 
 - name: configure generic table
   lineinfile:
-    dest: "{{ postfix_generic_file }}"
+    dest: "{{ postfix_smtp_generic_maps_file }}"
     regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
@@ -210,7 +210,7 @@
     mode: 0644
     create: true
     state: present
-  with_items: "{{ postfix_generic }}"
+  with_items: "{{ postfix_smtp_generic_maps }}"
   notify:
     - postmap generic
     - restart postfix

@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  pre_tasks:
+    - name: include variables
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "{{ playbook_dir }}/../../tests/vars/_{{ ansible_distribution_release }}.yml"
+        - "{{ playbook_dir }}/../../tests/vars/_{{ ansible_distribution | lower }}.yml"
+        - "{{ playbook_dir }}/../../tests/vars/_default.yml"
+  roles:
+    - ../../../

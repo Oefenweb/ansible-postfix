@@ -23,6 +23,7 @@ postfix_sender_dependent_relayhost_maps: []
 postfix_header_checks: []
 postfix_header_checks_database_type: regexp
 postfix_generic: []
+postfix_smtp_generic_maps_database_type: "{{ postfix_default_database_type }}"
 
 postfix_relayhost: ''
 postfix_relayhost_mxlookup: false

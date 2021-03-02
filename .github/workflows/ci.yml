@@ -23,7 +23,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies
-        run: pip install yamllint ansible-lint[core]
+        run: pip install ansible-lint[community,yamllint]
 
       - name: Lint code
         run: |

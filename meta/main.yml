@@ -1,6 +1,7 @@
-# meta file for postfix
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: postfix
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.

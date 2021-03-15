@@ -1,4 +1,4 @@
-# test file for postfix
+# test file
 ---
 - hosts: localhost
   connection: local

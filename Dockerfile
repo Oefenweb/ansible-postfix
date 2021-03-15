@@ -5,7 +5,7 @@ MAINTAINER Mischa ter Smitten <mtersmitten@oefenweb.nl>
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y python-minimal python-dev curl && \
   apt-get clean
-RUN curl -sL https://bootstrap.pypa.io/get-pip.py | python -
+RUN curl -sL https://bootstrap.pypa.io/pip/2.7/get-pip.py | python -
 RUN rm -rf $HOME/.cache
 
 # ansible

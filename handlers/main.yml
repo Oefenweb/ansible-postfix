@@ -1,4 +1,4 @@
-# handlers file for postfix
+# handlers file
 ---
 - name: new aliases
   command: newaliases

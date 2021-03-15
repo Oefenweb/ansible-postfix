@@ -1,4 +1,4 @@
-# vars file for postfix
+# vars file
 ---
 postfix_debconf_selections:
  - name: postfix

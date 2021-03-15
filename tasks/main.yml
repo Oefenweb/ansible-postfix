@@ -1,4 +1,4 @@
-# tasks file for postfix
+# tasks file
 ---
 - name: facts | set
   set_fact:

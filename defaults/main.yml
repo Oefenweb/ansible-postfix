@@ -1,4 +1,4 @@
-# defaults file for postfix
+# defaults file
 ---
 postfix_install:
   - postfix

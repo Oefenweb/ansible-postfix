@@ -9,7 +9,7 @@
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap sasl_passwd
-  command: postmap -p {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
+  command: postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap sender_canonical_maps

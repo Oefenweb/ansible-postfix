@@ -28,6 +28,9 @@ smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
 smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_tls_mandatory_protocols = {{ postfix_smtpd_tls_mandatory_protocols }}
+smtpd_tls_protocols = {{ postfix_smtpd_tls_protocols  }}
+smtpd_tls_mandatory_ciphers = {{ postfix_smtpd_tls_mandatory_ciphers }}
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.

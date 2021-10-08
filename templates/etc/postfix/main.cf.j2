@@ -85,6 +85,10 @@ smtp_sasl_security_options = {{ postfix_sasl_security_options }}
 smtp_sasl_tls_security_options = {{ postfix_sasl_tls_security_options }}
 smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% endif %}
+{% else %}
+relayhost =
+{% endif %}
+
 {% if postfix_relaytls %}
 smtp_use_tls = {{ postfix_relaytls | bool | ternary('yes', 'no') }}
 smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
@@ -92,9 +96,6 @@ smtp_tls_note_starttls_offer = {{ postfix_smtp_tls_note_starttls_offer | bool | 
 {% if postfix_smtp_tls_cafile is defined %}
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}
-{% endif %}
-{% else %}
-relayhost =
 {% endif %}
 
 {% if postfix_smtpd_client_restrictions is defined %}

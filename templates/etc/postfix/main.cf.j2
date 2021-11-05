@@ -88,6 +88,7 @@ smtp_sasl_mechanism_filter = {{ postfix_sasl_mechanism_filter }}
 {% if postfix_relaytls %}
 smtp_use_tls = {{ postfix_relaytls | bool | ternary('yes', 'no') }}
 smtp_tls_security_level = {{ postfix_smtp_tls_security_level }}
+smtp_tls_wrappermode = {{ postfix_smtp_tls_wrappermode | bool | ternary('yes', 'no') }}
 smtp_tls_note_starttls_offer = {{ postfix_smtp_tls_note_starttls_offer | bool | ternary('yes', 'no') }}
 {% if postfix_smtp_tls_cafile is defined %}
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}

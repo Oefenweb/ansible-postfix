@@ -39,6 +39,7 @@ postfix_sasl_tls_security_options: noanonymous
 postfix_sasl_mechanism_filter: ''
 
 postfix_smtp_tls_security_level: encrypt
+postfix_smtp_tls_wrappermode: false
 postfix_smtp_tls_note_starttls_offer: true
 
 postfix_inet_interfaces: all

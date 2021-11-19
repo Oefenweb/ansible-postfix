@@ -58,6 +58,7 @@ None
  * `postfix_sasl_mechanism_filter` [default: `''`]: SMTP client SASL authentication mechanism filter ([see](http://www.postfix.org/postconf.5.html#smtp_sasl_mechanism_filter))
 
  * `postfix_smtp_tls_security_level` [default: `encrypt`]: The default SMTP TLS security level for the Postfix SMTP client ([see](http://www.postfix.org/postconf.5.html#smtp_tls_security_level))
+ * `postfix_smtp_tls_wrappermode` [default: `false`]: Request that the Postfix SMTP client connects using the legacy SMTPS protocol instead of using the STARTTLS command ([see](http://www.postfix.org/postconf.5.html#smtp_tls_wrappermode))
  * `postfix_smtp_tls_note_starttls_offer` [default: `true`]: Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server ([see](http://www.postfix.org/postconf.5.html#smtp_tls_note_starttls_offer))
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
 

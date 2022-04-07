@@ -1,35 +1,43 @@
 # handlers file
 ---
 - name: new aliases
-  command: newaliases
+  command: >
+    newaliases
   when: postfix_default_database_type != 'regexp'
 
 - name: new virtual aliases
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
+  command: >
+    postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap sasl_passwd
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
+  command: >
+    postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap sender_canonical_maps
-  command: postmap {{ postfix_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
+  command: >
+    postmap {{ postfix_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
   when: postfix_sender_canonical_maps_database_type != 'regexp'
 
 - name: postmap recipient_canonical_maps
-  command: postmap {{ postfix_recipient_canonical_maps_database_type }}:{{ postfix_recipient_canonical_maps_file }}
+  command: >
+    postmap {{ postfix_recipient_canonical_maps_database_type }}:{{ postfix_recipient_canonical_maps_file }}
   when: postfix_recipient_canonical_maps_database_type != 'regexp'
 
 - name: postmap transport_maps
-  command: postmap {{ postfix_transport_maps_database_type }}:{{ postfix_transport_maps_file }}
+  command: >
+    postmap {{ postfix_transport_maps_database_type }}:{{ postfix_transport_maps_file }}
   when: postfix_transport_maps_database_type != 'regexp'
 
 - name: postmap sender_dependent_relayhost_maps
-  command: postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
+  command: >
+    postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
   when: postfix_default_database_type != 'regexp'
 
 - name: postmap generic
-  command: postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_smtp_generic_maps_file }}
+  command: >
+    postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_smtp_generic_maps_file }}
   when: postfix_smtp_generic_maps_database_type != 'regexp'
 
 - name: remove pid

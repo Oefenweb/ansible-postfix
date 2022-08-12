@@ -43,6 +43,8 @@ postfix_smtp_tls_wrappermode: false
 postfix_smtp_tls_note_starttls_offer: true
 
 postfix_inet_interfaces: all
+postfix_smtp_ipv6_bind: ''
+postfix_smtp_ipv4_bind: all
 postfix_inet_protocols: all
 postfix_mydestination:
   - "{{ postfix_hostname }}"

@@ -19,6 +19,7 @@
     - configuration
     - postfix
     - postfix-install
+  when: ansible_os_family == "Debian"
 
 - name: install package
   apt:

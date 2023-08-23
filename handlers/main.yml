@@ -1,54 +1,62 @@
 # handlers file
 ---
 - name: new aliases
-  command: >
+  ansible.builtin.command: >
     newaliases
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: new virtual aliases
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sasl_passwd
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sender_canonical_maps
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
   when: postfix_sender_canonical_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap recipient_canonical_maps
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_recipient_canonical_maps_database_type }}:{{ postfix_recipient_canonical_maps_file }}
   when: postfix_recipient_canonical_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap transport_maps
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_transport_maps_database_type }}:{{ postfix_transport_maps_file }}
   when: postfix_transport_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sender_dependent_relayhost_maps
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap generic
-  command: >
+  ansible.builtin.command: >
     postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_smtp_generic_maps_file }}
   when: postfix_smtp_generic_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: remove pid
-  file:
+  ansible.builtin.file:
     path: "~postfix/pid/master.pid"
     state: absent
   listen: restart postfix
   when: is_docker_guest
 
 - name: restart service
-  service:
+  ansible.builtin.service:
     name: postfix
     state: restarted
   listen: restart postfix

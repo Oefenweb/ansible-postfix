@@ -4,41 +4,49 @@
   ansible.builtin.command: >
     newaliases
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: new virtual aliases
   ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sasl_passwd
   ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sender_canonical_maps
   ansible.builtin.command: >
     postmap {{ postfix_sender_canonical_maps_database_type }}:{{ postfix_sender_canonical_maps_file }}
   when: postfix_sender_canonical_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap recipient_canonical_maps
   ansible.builtin.command: >
     postmap {{ postfix_recipient_canonical_maps_database_type }}:{{ postfix_recipient_canonical_maps_file }}
   when: postfix_recipient_canonical_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap transport_maps
   ansible.builtin.command: >
     postmap {{ postfix_transport_maps_database_type }}:{{ postfix_transport_maps_file }}
   when: postfix_transport_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap sender_dependent_relayhost_maps
   ansible.builtin.command: >
     postmap {{ postfix_default_database_type }}:{{ postfix_sender_dependent_relayhost_maps_file }}
   when: postfix_default_database_type != 'regexp'
+  changed_when: true
 
 - name: postmap generic
   ansible.builtin.command: >
     postmap {{ postfix_smtp_generic_maps_database_type }}:{{ postfix_smtp_generic_maps_file }}
   when: postfix_smtp_generic_maps_database_type != 'regexp'
+  changed_when: true
 
 - name: remove pid
   ansible.builtin.file:

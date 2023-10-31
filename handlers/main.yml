@@ -55,7 +55,7 @@
   listen: restart postfix
   when: is_docker_guest
 
-- name: Restart service
+- name: Restart postfix
   ansible.builtin.service:
     name: postfix
     state: restarted

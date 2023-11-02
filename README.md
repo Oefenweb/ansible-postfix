@@ -84,7 +84,7 @@ A simple example that doesn't use SASL relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -97,7 +97,7 @@ A simple example with virtual aliases for mail forwarding that doesn't use SASL 
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_mydestination:
       - "{{ postfix_hostname }}"
@@ -118,7 +118,7 @@ A simple example that rewrites the sender address:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_sender_canonical_maps:
       - sender: root
@@ -131,7 +131,7 @@ Provide the relay host name if you want to enable relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -145,7 +145,7 @@ Provide the relay domain name and use MX records if you want to enable relaying 
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -160,7 +160,7 @@ Conditional relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_transport_maps:
       - pattern: 'root@yourdomain.org'
@@ -182,7 +182,7 @@ For AWS SES support:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -200,7 +200,7 @@ For MailHog support:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -216,7 +216,7 @@ For Gmail support:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -241,7 +241,7 @@ A simple example that shows how to add some raw config:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_raw_options:
       - |

@@ -176,6 +176,20 @@ Conditional relaying:
         result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
 ```
 
+Aliases with regexp table:
+
+```yaml
+---
+- hosts: all
+  roles:
+    - oefenweb.postfix
+  vars:
+    postfix_default_database_type: regexp
+    postfix_aliases:
+      - user: /.*/
+        alias: you@yourdomain.org
+```
+
 For AWS SES support:
 
 ```yaml

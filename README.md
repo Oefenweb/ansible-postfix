@@ -18,6 +18,7 @@ None
  * `postfix_compatibility_level` [optional]: With backwards compatibility turned on (the compatibility_level value is less than the Postfix built-in value), Postfix looks for settings that are left at their implicit default value, and logs a message when a backwards-compatible default setting is required (e.g. `2`, `Postfix >= 3.0`)
 
  * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
+ * `postfix_alias_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for aliases
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#transport_maps))
@@ -176,7 +177,7 @@ Conditional relaying:
         result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
 ```
 
-Aliases with regexp table:
+Aliases with regexp table (forward all local mail to specified address):
 
 ```yaml
 ---
@@ -184,7 +185,7 @@ Aliases with regexp table:
   roles:
     - oefenweb.postfix
   vars:
-    postfix_default_database_type: regexp
+    postfix_alias_database_type: regexp
     postfix_aliases:
       - user: /.*/
         alias: you@yourdomain.org

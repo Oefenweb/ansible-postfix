@@ -34,8 +34,8 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 myhostname = {{ postfix_hostname }}
 default_database_type = {{ postfix_default_database_type }}
-alias_maps = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
-alias_database = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
+alias_maps = {{ postfix_alias_database_type }}:{{ postfix_aliases_file }}
+alias_database = {{ postfix_alias_database_type }}:{{ postfix_aliases_file }}
 {% if postfix_virtual_aliases %}
 virtual_alias_maps = {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
 {% endif %}

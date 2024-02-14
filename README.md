@@ -69,6 +69,7 @@ None
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
 
+ * `postfix_smtpd_security_level` [optional]: The SMTP TLS security level for the Postfix SMTP server ([see](http://www.postfix.org/postconf.5.html#smtpd_tls_security_level))
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
 
 ## Dependencies

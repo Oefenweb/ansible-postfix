@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 # See man 5 aliases for format
 
-{% if postfix_alias_database_type == "regexp" %}
+{% if postfix_aliases_database_type == 'regexp' %}
 {% for alias in postfix_aliases %}
 {{ alias.user }} {{ alias.alias }}
 {% endfor %}

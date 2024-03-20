@@ -3,7 +3,7 @@
 - name: new aliases
   ansible.builtin.command: >
     newaliases
-  when: postfix_alias_database_type != 'regexp'
+  when: postfix_aliases_database_type != 'regexp'
   changed_when: true
 
 - name: new virtual aliases

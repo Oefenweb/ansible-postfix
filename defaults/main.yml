@@ -11,8 +11,8 @@ postfix_hostname: "{{ ansible_fqdn }}"
 postfix_mailname: "{{ ansible_fqdn }}"
 
 postfix_default_database_type: hash
-postfix_alias_database_type: "{{ postfix_default_database_type }}"
 postfix_aliases: []
+postfix_aliases_database_type: "{{ postfix_default_database_type }}"
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
 postfix_sender_canonical_maps_database_type: "{{ postfix_default_database_type }}"

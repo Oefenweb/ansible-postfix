@@ -1,6 +1,5 @@
 ---
 warn_list:
-  - '106'
-  - '204'
-  - '405'
-  - '601'
+  - role-name
+  - name[play]
+  - name[casing]

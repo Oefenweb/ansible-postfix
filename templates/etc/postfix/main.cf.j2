@@ -25,7 +25,10 @@ compatibility_level = {{ postfix_compatibility_level }}
 # TLS parameters
 smtpd_tls_cert_file = {{ postfix_smtpd_tls_cert_file }}
 smtpd_tls_key_file = {{ postfix_smtpd_tls_key_file }}
-smtpd_use_tls=yes
+smtpd_use_tls = yes
+{% if postfix_smtpd_tls_security_level is defined %}
+smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
+{% endif %}
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
@@ -59,8 +62,8 @@ smtp_tls_protocols = {{ postfix_smtp_tls_protocols }}
 
 myhostname = {{ postfix_hostname }}
 default_database_type = {{ postfix_default_database_type }}
-alias_maps = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
-alias_database = {{ postfix_default_database_type }}:{{ postfix_aliases_file }}
+alias_maps = {{ postfix_aliases_database_type }}:{{ postfix_aliases_file }}
+alias_database = {{ postfix_aliases_database_type }}:{{ postfix_aliases_file }}
 {% if postfix_virtual_aliases %}
 virtual_alias_maps = {{ postfix_default_database_type }}:{{ postfix_virtual_aliases_file }}
 {% endif %}

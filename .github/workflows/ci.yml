@@ -15,15 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install test dependencies
-        run: pip install ansible-lint[community,yamllint]
+        run: |
+          pip install ansible-lint
+          ansible-galaxy install -r requirements.yml
 
       - name: Lint code
         run: |
@@ -42,12 +44,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - distro: debian8
-            ansible-version: '<2.10'
-          - distro: debian9
           - distro: debian10
-          - distro: ubuntu1604
-            ansible-version: '>=2.9, <2.10'
+          - distro: debian11
+          - distro: debian12
           - distro: ubuntu1604
             ansible-version: '>=2.10, <2.11'
           - distro: ubuntu1604
@@ -56,17 +55,17 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: "${{ github.repository }}"
 
       - name: Set up Python 3
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install test dependencies
-        run: pip install 'ansible${{ matrix.ansible-version }}' molecule[docker] docker
+        run: pip install 'ansible${{ matrix.ansible-version }}' molecule-plugins[docker] docker
 
       - name: Run Molecule tests
         run: |

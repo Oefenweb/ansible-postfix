@@ -38,6 +38,8 @@ None
  * `postfix_mynetworks` [default: `['127.0.0.0/8', '[::ffff:127.0.0.0]/104', '[::1]/128']`]: The list of "trusted" remote SMTP clients that have more privileges than "strangers"
  * `postfix_inet_interfaces` [default: `all`]: Network interfaces to bind ([see](http://www.postfix.org/postconf.5.html#inet_interfaces))
  * `postfix_inet_protocols` [default: `all`]: The Internet protocols Postfix will attempt to use when making or accepting connections ([see](http://www.postfix.org/postconf.5.html#inet_protocols))
+ * `postfix_smtp_ipv4_bind` [optional]: Outbound network interfaces to use (IPv4) ([see](http://www.postfix.org/postconf.5.html#smtp_bind_address))
+ * `postfix_smtp_ipv6_bind` [optional]: Outbound network interfaces to use (IPv6) ([see](http://www.postfix.org/postconf.5.html#smtp_bind_address6))
 
  * `postfix_relayhost` [default: `''` (no relay host)]: Hostname to relay all email to
  * `postfix_relayhost_mxlookup` [default: `false` (not using mx lookup)]: Lookup for MX record instead of A record for relayhost

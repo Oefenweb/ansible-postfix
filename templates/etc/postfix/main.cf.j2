@@ -88,6 +88,12 @@ inet_interfaces = {{ postfix_inet_interfaces }}
 {% else %}
 inet_interfaces = {{ postfix_inet_interfaces | join(', ') }}
 {% endif %}
+{% if postfix_smtp_ipv4_bind is defined %}
+smtp_bind_address = {{ postfix_smtp_ipv4_bind }}
+{% endif %}
+{% if postfix_smtp_ipv6_bind is defined %}
+smtp_bind_address6 = {{ postfix_smtp_ipv6_bind }}
+{% endif %}
 {% if postfix_inet_protocols is string %}
 inet_protocols = {{ postfix_inet_protocols }}
 {% else %}

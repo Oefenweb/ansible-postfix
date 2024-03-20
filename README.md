@@ -19,6 +19,7 @@ None
 
  * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
+ * `postfix_aliases_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for aliases
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#transport_maps))
  * `postfix_sender_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_sender_canonical_maps`
@@ -71,7 +72,17 @@ None
  * `postfix_smtpd_tls_cert_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.pem`]: Path to certificate file
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
 
+ * `postfix_smtpd_security_level` [optional]: The SMTP TLS security level for the Postfix SMTP server ([see](http://www.postfix.org/postconf.5.html#smtpd_tls_security_level))
+
+ * `postfix_smtp_tls_mandatory_ciphers` [optional]: The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS ([see](https://www.postfix.org/postconf.5.html#smtp_tls_mandatory_ciphers))
+ * `postfix_smtp_tls_mandatory_protocols` [optional]: TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.smtp_tls_mandatory_protocols))
+ * `postfix_smtp_tls_protocols` [optional]: TLS protocols that the Postfix SMTP client will use with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtp_tls_protocols))
+ * `postfix_smtpd_tls_mandatory_ciphers` [optional]: The minimum TLS cipher grade that the Postfix SMTP server will use with mandatory TLS encryption.  ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_ciphers))
+ * `postfix_smtpd_tls_mandatory_protocols` [optional]: TLS protocols accepted by the Postfix SMTP server with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_protocols))
+ * `postfix_smtpd_tls_protocols` [optional]: TLS protocols accepted by the Postfix SMTP server with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_protocols))
+
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
+
 
 ## Dependencies
 
@@ -86,7 +97,7 @@ A simple example that doesn't use SASL relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -99,7 +110,7 @@ A simple example with virtual aliases for mail forwarding that doesn't use SASL 
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_mydestination:
       - "{{ postfix_hostname }}"
@@ -120,7 +131,7 @@ A simple example that rewrites the sender address:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_sender_canonical_maps:
       - sender: root
@@ -133,7 +144,7 @@ Provide the relay host name if you want to enable relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -147,7 +158,7 @@ Provide the relay domain name and use MX records if you want to enable relaying 
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -162,7 +173,7 @@ Conditional relaying:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_transport_maps:
       - pattern: 'root@yourdomain.org'
@@ -178,13 +189,27 @@ Conditional relaying:
         result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
 ```
 
+Aliases with regexp table (forward all local mail to specified address):
+
+```yaml
+---
+- hosts: all
+  roles:
+    - oefenweb.postfix
+  vars:
+    postfix_aliases_database_type: regexp
+    postfix_aliases:
+      - user: /.*/
+        alias: you@yourdomain.org
+```
+
 For AWS SES support:
 
 ```yaml
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -202,7 +227,7 @@ For MailHog support:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -218,7 +243,7 @@ For Gmail support:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_aliases:
       - user: root
@@ -243,7 +268,7 @@ A simple example that shows how to add some raw config:
 ---
 - hosts: all
   roles:
-    - postfix
+    - oefenweb.postfix
   vars:
     postfix_raw_options:
       - |

@@ -1,17 +1,20 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Mischa ter Smitten <mtersmitten@oefenweb.nl>
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # python
 RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y python-minimal python-dev curl && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y python3-minimal python3-dev curl && \
   apt-get clean
-RUN curl -sL https://bootstrap.pypa.io/pip/2.7/get-pip.py | python -
+RUN curl -sL https://bootstrap.pypa.io/pip/3.6/get-pip.py | python3 -
 RUN rm -rf $HOME/.cache
 
 # ansible
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y gcc libffi-dev libssl-dev && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-apt && \
   apt-get clean
-RUN pip install ansible==2.9.15
+RUN pip3 install ansible==2.10.7
 RUN rm -rf $HOME/.cache
 
 # provision

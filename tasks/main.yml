@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: facts | set
-  set_fact:
+  ansible.builtin.set_fact:
     is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
   tags:
     - configuration
@@ -9,7 +9,7 @@
     - postfix-facts
 
 - name: configure debconf
-  debconf:
+  ansible.builtin.debconf:
     name: "{{ item.name }}"
     question: "{{ item.question }}"
     value: "{{ item.value }}"
@@ -21,7 +21,7 @@
     - postfix-install
 
 - name: install package
-  apt:
+  ansible.builtin.apt:
     name: "{{ postfix_install }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -32,7 +32,7 @@
     - postfix-install
 
 - name: configure mailname
-  template:
+  ansible.builtin.template:
     src: "{{ postfix_mailname_file.lstrip('/') }}.j2"
     dest: "{{ postfix_mailname_file }}"
     owner: root
@@ -45,7 +45,7 @@
     - postfix-mailname
 
 - name: update configuration file
-  template:
+  ansible.builtin.template:
     src: "{{ postfix_main_cf.lstrip('/') }}.j2"
     dest: "{{ postfix_main_cf }}"
     owner: root
@@ -58,7 +58,7 @@
     - postfix-configuration
 
 - name: configure sasl username/password
-  template:
+  ansible.builtin.template:
     src: "{{ postfix_sasl_passwd_file.lstrip('/') }}.j2"
     dest: "{{ postfix_sasl_passwd_file }}"
     owner: root
@@ -77,7 +77,7 @@
     - postfix-sasl-passwd
 
 - name: configure aliases
-  template:
+  ansible.builtin.template:
     src: "{{ postfix_aliases_file.lstrip('/') }}.j2"
     dest: "{{ postfix_aliases_file }}"
     owner: root
@@ -92,11 +92,11 @@
     - postfix-aliases
 
 - name: check if aliases.db exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ postfix_aliases_file }}.db"
   register: _aliasesdb
   changed_when: not _aliasesdb.stat.exists
-  when: postfix_default_database_type == 'hash'
+  when: postfix_aliases_database_type == 'hash'
   notify:
     - new aliases
     - restart postfix
@@ -106,7 +106,7 @@
     - postfix-aliases
 
 - name: configure virtual aliases
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_virtual_aliases_file }}"
     regexp: '^{{ item.virtual | regex_escape }}\s.*'
     line: '{{ item.virtual }} {{ item.alias }}'
@@ -125,7 +125,7 @@
     - postfix-virtual-aliases
 
 - name: configure sender canonical maps
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_sender_canonical_maps_file }}"
     regexp: '^{{ item.sender | regex_escape }}\s.*'
     line: '{{ item.sender }} {{ item.rewrite }}'
@@ -144,7 +144,7 @@
     - postfix-sender-canonical-maps
 
 - name: configure recipient canonical maps
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_recipient_canonical_maps_file }}"
     regexp: '^{{ item.recipient | regex_escape }}\s.*'
     line: '{{ item.recipient }} {{ item.rewrite }}'
@@ -163,7 +163,7 @@
     - postfix-recipient-canonical-maps
 
 - name: configure transport maps
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_transport_maps_file }}"
     regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
@@ -182,7 +182,7 @@
     - postfix-transport-maps
 
 - name: configure sender dependent relayhost maps
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_sender_dependent_relayhost_maps_file }}"
     regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
@@ -201,7 +201,7 @@
     - postfix-sender-dependent-relayhost-maps
 
 - name: configure generic table
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postfix_smtp_generic_maps_file }}"
     regexp: '^{{ item.pattern | regex_escape }}\s.*'
     line: '{{ item.pattern }} {{ item.result }}'
@@ -220,7 +220,7 @@
     - postfix-generic-table
 
 - name: configure header checks
-  template:
+  ansible.builtin.template:
     src: "{{ postfix_header_checks_file.lstrip('/') }}.j2"
     dest: "{{ postfix_header_checks_file }}"
     owner: root
@@ -234,7 +234,7 @@
     - postfix-header-checks-table
 
 - name: start and enable service
-  service:
+  ansible.builtin.service:
     name: postfix
     state: "{{ service_default_state | default('started') }}"
     enabled: "{{ service_default_enabled | default(true) | bool }}"

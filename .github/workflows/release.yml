@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Publish to Galaxy
         uses: robertdebock/galaxy-action@1.2.0

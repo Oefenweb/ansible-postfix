@@ -71,13 +71,15 @@ None
  * `postfix_smtpd_tls_key_file` [default: `/etc/ssl/certs/ssl-cert-snakeoil.key`]: Path to key file
 
  * `postfix_smtpd_security_level` [optional]: The SMTP TLS security level for the Postfix SMTP server ([see](http://www.postfix.org/postconf.5.html#smtpd_tls_security_level))
+
+ * `postfix_smtp_tls_mandatory_ciphers` [optional]: The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS ([see](https://www.postfix.org/postconf.5.html#smtp_tls_mandatory_ciphers))
+ * `postfix_smtp_tls_mandatory_protocols` [optional]: TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.smtp_tls_mandatory_protocols))
+ * `postfix_smtp_tls_protocols` [optional]: TLS protocols that the Postfix SMTP client will use with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtp_tls_protocols))
+ * `postfix_smtpd_tls_mandatory_ciphers` [optional]: The minimum TLS cipher grade that the Postfix SMTP server will use with mandatory TLS encryption.  ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_ciphers))
+ * `postfix_smtpd_tls_mandatory_protocols` [optional]: TLS protocols accepted by the Postfix SMTP server with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_protocols))
+ * `postfix_smtpd_tls_protocols` [optional]: TLS protocols accepted by the Postfix SMTP server with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_protocols))
+
  * `postfix_raw_options` [default: `[]`]: List of lines (to pass extra (unsupported) configuration)
- * `postfix_smtp_tls_mandatory_ciphers` [default: `undefined`]: The minimum TLS cipher grade that the Postfix SMTP client will use with mandatory TLS ([see](https://www.postfix.org/postconf.5.html#smtp_tls_mandatory_ciphers))
- * `postfix_smtp_tls_mandatory_protocols` [default: `undefined`]: TLS protocols that the Postfix SMTP client will use with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.smtp_tls_mandatory_protocols))
- * `postfix_smtp_tls_protocols` [default: `undefined`]: TLS protocols that the Postfix SMTP client will use with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtp_tls_protocols))
- * `postfix_smtpd_tls_mandatory_ciphers` [default: `undefined`]: The minimum TLS cipher grade that the Postfix SMTP server will use with mandatory TLS encryption.  ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_ciphers))
- * `postfix_smtpd_tls_mandatory_protocols` [default: `undefined`]: TLS protocols accepted by the Postfix SMTP server with mandatory TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_mandatory_protocols))
- * `postfix_smtpd_tls_protocols` [default: `undefined`]: TLS protocols accepted by the Postfix SMTP server with opportunistic TLS encryption ([see](https://www.postfix.org/postconf.5.html#smtpd_tls_protocols))
 
 
 ## Dependencies

@@ -32,27 +32,21 @@ smtpd_tls_security_level = {{ postfix_smtpd_tls_security_level }}
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
-# smtp : SMTP sortant
 {% if postfix_smtp_tls_mandatory_ciphers is defined %}
 smtp_tls_mandatory_ciphers = {{ postfix_smtp_tls_mandatory_ciphers }}
 {% endif %}
-
 {% if postfix_smtpd_tls_mandatory_ciphers is defined %}
 smtpd_tls_mandatory_ciphers = {{ postfix_smtpd_tls_mandatory_ciphers }}
 {% endif %}
-
 {% if postfix_smtpd_tls_mandatory_protocols is defined %}
 smtpd_tls_mandatory_protocols = {{ postfix_smtpd_tls_mandatory_protocols }}
 {% endif %}
-
 {% if postfix_smtpd_tls_protocols is defined %}
 smtpd_tls_protocols = {{ postfix_smtpd_tls_protocols  }}
 {% endif %}
-
 {% if postfix_smtp_tls_mandatory_protocols is defined %}
 smtp_tls_mandatory_protocols = {{ postfix_smtp_tls_mandatory_protocols }}
 {% endif %}
-
 {% if postfix_smtp_tls_protocols is defined %}
 smtp_tls_protocols = {{ postfix_smtp_tls_protocols }}
 {% endif %}

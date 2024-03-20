@@ -19,6 +19,7 @@ None
 
  * `postfix_default_database_type` [default: `hash`]: The default database type for use in `newaliases`, `postalias` and `postmap` commands
  * `postfix_aliases` [default: `[]`]: Aliases to ensure present in `/etc/aliases`
+ * `postfix_aliases_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for aliases
  * `postfix_virtual_aliases` [default: `[]`]: Virtual aliases to ensure present in `/etc/postfix/virtual`
  * `postfix_sender_canonical_maps` [default: `[]`]: Sender address rewriting in `/etc/postfix/sender_canonical_maps` ([see](http://www.postfix.org/postconf.5.html#transport_maps))
  * `postfix_sender_canonical_maps_database_type` [default: `"{{ postfix_default_database_type }}"`]: The database type for use in `postfix_sender_canonical_maps`
@@ -175,6 +176,20 @@ Conditional relaying:
         result: 'DUNNO'
       - pattern: '*'
         result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
+```
+
+Aliases with regexp table (forward all local mail to specified address):
+
+```yaml
+---
+- hosts: all
+  roles:
+    - oefenweb.postfix
+  vars:
+    postfix_aliases_database_type: regexp
+    postfix_aliases:
+      - user: /.*/
+        alias: you@yourdomain.org
 ```
 
 For AWS SES support:

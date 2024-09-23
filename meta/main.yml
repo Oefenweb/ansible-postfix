@@ -1,9 +1,8 @@
 # meta file
 ---
 galaxy_info:
-  namespace: oefenweb
+  author: oefenweb
   role_name: postfix
-  author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up a postfix server in Debian-like systems
   license: MIT
@@ -11,9 +10,9 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
         - focal
+        - jammy
     - name: Debian
       versions:
         - buster

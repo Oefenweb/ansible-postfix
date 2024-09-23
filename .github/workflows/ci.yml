@@ -47,11 +47,10 @@ jobs:
           - distro: debian10
           - distro: debian11
           - distro: debian12
-          - distro: ubuntu1604
-            ansible-version: '>=2.10, <2.11'
-          - distro: ubuntu1604
           - distro: ubuntu1804
+            ansible-version: '>=9, <10'
           - distro: ubuntu2004
+          - distro: ubuntu2204
 
     steps:
       - name: Check out the codebase
@@ -65,8 +64,8 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies
-        run: pip install 'ansible${{ matrix.ansible-version }}' molecule-plugins[docker] docker
-
+        run: |
+          pip install 'ansible${{ matrix.ansible-version }}' molecule-plugins[docker] docker
       - name: Run Molecule tests
         run: |
           molecule test

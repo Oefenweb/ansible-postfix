@@ -51,6 +51,7 @@ jobs:
             ansible-version: '>=9, <10'
           - distro: ubuntu2004
           - distro: ubuntu2204
+          - distro: ubuntu2404
 
     steps:
       - name: Check out the codebase

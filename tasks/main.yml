@@ -37,7 +37,7 @@
     dest: "{{ postfix_mailname_file }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart postfix
   tags:
     - configuration
@@ -50,7 +50,7 @@
     dest: "{{ postfix_main_cf }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart postfix
   tags:
     - configuration
@@ -63,7 +63,7 @@
     dest: "{{ postfix_sasl_passwd_file }}"
     owner: root
     group: root
-    mode: 0600
+    mode: '0600'
   when:
     - postfix_relayhost | length
     - postfix_sasl_auth_enable | bool
@@ -82,7 +82,7 @@
     dest: "{{ postfix_aliases_file }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify:
     - new aliases
     - restart postfix
@@ -112,7 +112,7 @@
     line: '{{ item.virtual }} {{ item.alias }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_virtual_aliases }}"
@@ -131,7 +131,7 @@
     line: '{{ item.sender }} {{ item.rewrite }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_sender_canonical_maps }}"
@@ -150,7 +150,7 @@
     line: '{{ item.recipient }} {{ item.rewrite }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_recipient_canonical_maps }}"
@@ -169,7 +169,7 @@
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_transport_maps }}"
@@ -188,7 +188,7 @@
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_sender_dependent_relayhost_maps }}"
@@ -207,7 +207,7 @@
     line: '{{ item.pattern }} {{ item.result }}'
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     create: true
     state: present
   with_items: "{{ postfix_smtp_generic_maps }}"
@@ -225,7 +225,7 @@
     dest: "{{ postfix_header_checks_file }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify:
     - restart postfix
   tags:

@@ -1,6 +1,7 @@
 # test file
 ---
-- hosts: localhost
+- name: converge
+  hosts: localhost
   connection: local
   become: true
   roles:

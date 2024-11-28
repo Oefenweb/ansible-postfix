@@ -45,6 +45,7 @@ jobs:
       matrix:
         include:
           - distro: debian10
+            ansible-version: '>=9, <10'
           - distro: debian11
           - distro: debian12
           - distro: ubuntu1804

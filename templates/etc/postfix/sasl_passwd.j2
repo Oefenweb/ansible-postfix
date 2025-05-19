@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+{{ ansible_managed | comment }}
 
 {% if postfix_relayhost_mxlookup %}
 {{ postfix_relayhost }}:{{ postfix_relayhost_port }}	{{ postfix_sasl_user }}:{{ postfix_sasl_password }}

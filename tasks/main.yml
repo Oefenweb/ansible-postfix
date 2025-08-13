@@ -65,7 +65,7 @@
     group: root
     mode: '0600'
   when:
-    - postfix_relayhost | length
+    - postfix_relayhost | length > 0
     - postfix_sasl_auth_enable | bool
   no_log: "{{ not ansible_check_mode }}"
   notify:

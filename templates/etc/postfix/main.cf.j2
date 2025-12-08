@@ -100,11 +100,11 @@ inet_protocols = {{ postfix_inet_protocols }}
 inet_protocols = {{ postfix_inet_protocols | join(', ') }}
 {% endif %}
 
-{% if postfix_relayhost %}
+{% if postfix_relayhosts %}
 {% if postfix_relayhost_mxlookup %}
-relayhost = {{ postfix_relayhost }}:{{ postfix_relayhost_port }}
+relayhost = {% for host in postfix_relayhosts %}{{ host }}:{{ postfix_relayhost_port }}{{ ", " if not loop.last else "" }}{% endfor %}
 {% else %}
-relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}
+relayhost = {% for host in postfix_relayhosts %}[{{ host }}]:{{ postfix_relayhost_port }}{{ ", " if not loop.last else "" }}{% endfor %}
 {% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}

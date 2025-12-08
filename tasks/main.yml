@@ -8,6 +8,16 @@
     - postfix
     - postfix-facts
 
+- name: support deprecated postfix_relayhost
+  ansible.builtin.set_fact:
+    postfix_relayhosts: ["{{ postfix_relayhost }}"]
+  when:
+    - postfix_relayhosts | length == 0 and postfix_relayhost is defined
+  tags:
+    - configuration
+    - postfix
+    - postfix-facts
+
 - name: configure debconf
   ansible.builtin.debconf:
     name: "{{ item.name }}"
@@ -65,7 +75,7 @@
     group: root
     mode: '0600'
   when:
-    - postfix_relayhost | length > 0
+    - postfix_relayhosts | length > 0
     - postfix_sasl_auth_enable | bool
   no_log: "{{ not ansible_check_mode }}"
   notify:

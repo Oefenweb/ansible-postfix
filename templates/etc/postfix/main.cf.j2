@@ -102,9 +102,9 @@ inet_protocols = {{ postfix_inet_protocols | join(', ') }}
 
 {% if postfix_relayhosts %}
 {% if postfix_relayhost_mxlookup %}
-relayhost = {% for host in postfix_relayhosts %}{{ host }}:{{ postfix_relayhost_port }}{{ ", " if not loop.last else "" }}{% endfor %}
+relayhost = {% for host in postfix_relayhosts %}{{ host }}:{{ postfix_relayhost_port }}{{ ', ' if not loop.last else '' }}{% endfor %}
 {% else %}
-relayhost = {% for host in postfix_relayhosts %}[{{ host }}]:{{ postfix_relayhost_port }}{{ ", " if not loop.last else "" }}{% endfor %}
+relayhost = {% for host in postfix_relayhosts %}[{{ host }}]:{{ postfix_relayhost_port }}{{ ', ' if not loop.last else '' }}{% endfor %}
 {% endif %}
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}

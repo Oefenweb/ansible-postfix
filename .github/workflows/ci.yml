@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Set up Python 3
         uses: actions/setup-python@v4
@@ -44,19 +44,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - distro: debian10
-            ansible-version: '>=9, <10'
           - distro: debian11
           - distro: debian12
-          - distro: ubuntu1804
-            ansible-version: '>=9, <10'
-          - distro: ubuntu2004
+          - distro: debian13
           - distro: ubuntu2204
           - distro: ubuntu2404
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           path: "${{ github.repository }}"
 

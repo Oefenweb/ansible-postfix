@@ -1,12 +1,21 @@
 # tasks file
 ---
 - name: facts | set
-  ansible.builtin.set_fact:
-    is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
   tags:
     - configuration
     - postfix
     - postfix-facts
+  block:
+    - name: facts | set | is_docker_guest
+      ansible.builtin.set_fact:
+        is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
+
+    - name: facts | set | postfix_relayhosts
+      ansible.builtin.set_fact:
+        postfix_relayhosts: ["{{ postfix_relayhost }}"]
+      when:
+        - postfix_relayhosts | length == 0
+        - postfix_relayhost is defined
 
 - name: configure debconf
   ansible.builtin.debconf:
@@ -65,7 +74,7 @@
     group: root
     mode: '0600'
   when:
-    - postfix_relayhost | length > 0
+    - postfix_relayhosts | length > 0
     - postfix_sasl_auth_enable | bool
   no_log: "{{ not ansible_check_mode }}"
   notify:

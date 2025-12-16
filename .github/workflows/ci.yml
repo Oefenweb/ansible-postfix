@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Set up Python 3
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3 - 3.13'
 
       - name: Install test dependencies
         run: |
@@ -44,30 +44,30 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - distro: debian10
-            ansible-version: '>=9, <10'
           - distro: debian11
           - distro: debian12
           - distro: ubuntu1804
             ansible-version: '>=9, <10'
           - distro: ubuntu2004
+            ansible-version: '>=12, <13'
           - distro: ubuntu2204
           - distro: ubuntu2404
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           path: "${{ github.repository }}"
 
       - name: Set up Python 3
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3 - 3.13'
 
       - name: Install test dependencies
         run: |
           pip install 'ansible${{ matrix.ansible-version }}' molecule-plugins[docker] docker
+
       - name: Run Molecule tests
         run: |
           molecule test

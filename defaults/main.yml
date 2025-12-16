@@ -27,7 +27,7 @@ postfix_generic: "{{ postfix_smtp_generic_maps }}"
 postfix_smtp_generic_maps: []
 postfix_smtp_generic_maps_database_type: "{{ postfix_default_database_type }}"
 
-postfix_relayhost: ''
+postfix_relayhosts: []
 postfix_relayhost_mxlookup: false
 postfix_relayhost_port: 587
 postfix_relaytls: false

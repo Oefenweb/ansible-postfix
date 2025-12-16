@@ -42,7 +42,7 @@ None
  * `postfix_smtp_ipv6_bind` [optional]: Outbound network interfaces to use (IPv6) ([see](http://www.postfix.org/postconf.5.html#smtp_bind_address6))
 
  * `postfix_relayhost` [default: `''` (no relay host)]: Hostname to relay all email to. **Deprecated**, use `postfix_relayhosts`.
- * `postfix_relayhosts` [default: `[]` (no relay host)]: List of hostnames to relay all email to
+ * `postfix_relayhosts` [default: `[]` (no relay host)]: List of hostnames to relay all email to (setting multiple hosts only works in **postfix 3.5 and later**)
  * `postfix_relayhost_mxlookup` [default: `false` (not using mx lookup)]: Lookup for MX record instead of A record for relayhosts
  * `postfix_relayhost_port` [default: `587`]: Relay port (on all hosts in `postfix_relayhosts`)
  * `postfix_relaytls` [default: `false`]: Use TLS when sending with a relay host

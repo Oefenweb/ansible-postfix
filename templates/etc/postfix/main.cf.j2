@@ -106,6 +106,7 @@ relayhost = {% for host in postfix_relayhosts %}{{ host }}:{{ postfix_relayhost_
 {% else %}
 relayhost = {% for host in postfix_relayhosts %}[{{ host }}]:{{ postfix_relayhost_port }}{{ ', ' if not loop.last else '' }}{% endfor %}
 {% endif %}
+
 {% if postfix_sasl_auth_enable %}
 smtp_sasl_auth_enable = {{ postfix_sasl_auth_enable | bool | ternary('yes', 'no') }}
 smtp_sasl_password_maps = {{ postfix_default_database_type }}:{{ postfix_sasl_passwd_file }}

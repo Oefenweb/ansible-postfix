@@ -12,8 +12,8 @@ None
 #### Variables
 
  * `postfix_install` [default: `[postfix, mailutils, libsasl2-2, sasl2-bin, libsasl2-modules]`]: Packages to install
- * `postfix_hostname` [default: `{{ ansible_fqdn }}`]: Host name, used for `myhostname` and in `mydestination`
- * `postfix_mailname` [default: `{{ ansible_fqdn }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
+ * `postfix_hostname` [default: `{{ ansible_facts['fqdn'] }}`]: Host name, used for `myhostname` and in `mydestination`
+ * `postfix_mailname` [default: `{{ ansible_facts['fqdn'] }}`]: Mail name (in `/etc/mailname`), used for `myorigin`
 
  * `postfix_compatibility_level` [optional]: With backwards compatibility turned on (the compatibility_level value is less than the Postfix built-in value), Postfix looks for settings that are left at their implicit default value, and logs a message when a backwards-compatible default setting is required (e.g. `2`, `Postfix >= 3.0`)
 
@@ -55,7 +55,7 @@ None
  * `postfix_smtpd_data_restrictions` [optional]: List of data restrictions ([see](http://www.postfix.org/postconf.5.html#smtpd_data_restrictions))
 
  * `postfix_sasl_auth_enable` [default: `true`]: Enable SASL authentication in the SMTP client
- * `postfix_sasl_user` [default: `postmaster@{{ ansible_domain }}`]: SASL relay username
+ * `postfix_sasl_user` [default: `postmaster@{{ ansible_facts['domain'] }}`]: SASL relay username
  * `postfix_sasl_password` [default: `k8+haga4@#pR`]: SASL relay password **Make sure to change!**
  * `postfix_sasl_security_options` [default: `noanonymous`]: SMTP client SASL security options
  * `postfix_sasl_tls_security_option` [default: `noanonymous`]: SMTP client SASL TLS security options

@@ -7,8 +7,8 @@ postfix_install:
   - sasl2-bin
   - libsasl2-modules
 
-postfix_hostname: "{{ ansible_fqdn }}"
-postfix_mailname: "{{ ansible_fqdn }}"
+postfix_hostname: "{{ ansible_facts['fqdn'] }}"
+postfix_mailname: "{{ ansible_facts['fqdn'] }}"
 
 postfix_default_database_type: hash
 postfix_aliases: []
@@ -33,7 +33,7 @@ postfix_relayhost_port: 587
 postfix_relaytls: false
 
 postfix_sasl_auth_enable: true
-postfix_sasl_user: "postmaster@{{ ansible_domain }}"
+postfix_sasl_user: "postmaster@{{ ansible_facts['domain'] }}"
 postfix_sasl_password: 'k8+haga4@#pR'
 postfix_sasl_security_options: noanonymous
 postfix_sasl_tls_security_options: noanonymous

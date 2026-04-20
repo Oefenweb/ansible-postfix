@@ -28,6 +28,8 @@
     - configuration
     - postfix
     - postfix-install
+  when:
+    - ansible_facts['os_family'] == 'Debian'
 
 - name: install package
   ansible.builtin.apt:
@@ -39,6 +41,8 @@
     - configuration
     - postfix
     - postfix-install
+  when:
+    - ansible_facts['os_family'] == 'Debian'
 
 - name: configure mailname
   ansible.builtin.template:

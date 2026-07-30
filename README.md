@@ -180,14 +180,14 @@ Conditional relaying:
       - pattern: 'root@yourdomain.org'
         result: ':'
       - pattern: '*'
-        result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
+        result: "smtp:{{ ansible_facts['lo']['ipv4']['address'] }}:1025"
     postfix_sender_dependent_relayhost_maps:
       - pattern: 'logcheck@yourdomain.org'
         result: 'DUNNO'
       - pattern: 'pflogsumm@yourdomain.org'
         result: 'DUNNO'
       - pattern: '*'
-        result: "smtp:{{ ansible_lo['ipv4']['address'] }}:1025"
+        result: "smtp:{{ ansible_facts['lo']['ipv4']['address'] }}:1025"
 ```
 
 Aliases with regexp table (forward all local mail to specified address):
@@ -233,7 +233,7 @@ For MailHog support:
     postfix_aliases:
       - user: root
         alias: you@yourdomain.org
-    postfix_relayhost: ["{{ ansible_lo['ipv4']['address'] }}"]
+    postfix_relayhost: ["{{ ansible_facts['lo']['ipv4']['address'] }}"]
     postfix_relayhost_port: 1025
     postfix_sasl_auth_enable: false
 ```

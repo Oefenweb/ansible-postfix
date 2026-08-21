@@ -14,7 +14,7 @@ RUN rm -rf $HOME/.cache
 # ansible
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-apt && \
   apt-get clean
-RUN pip3 install ansible==2.10.7
+RUN pip3 install ansible==4.10.0
 RUN rm -rf $HOME/.cache
 
 # provision

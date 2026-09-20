@@ -56,6 +56,11 @@ postfix_mynetworks:
   - '[::1]/128'
 
 postfix_smtpd_banner: '$myhostname ESMTP $mail_name (Ubuntu)'
+
+postfix_smtpd_relay_restrictions:
+  - permit_mynetworks
+  - reject
+
 postfix_disable_vrfy_command: true
 postfix_message_size_limit: 10240000
 

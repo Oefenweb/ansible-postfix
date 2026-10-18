@@ -66,7 +66,7 @@ None
  * `postfix_smtp_tls_note_starttls_offer` [default: `true`]: Log the hostname of a remote SMTP server that offers STARTTLS, when TLS is not already enabled for that server ([see](http://www.postfix.org/postconf.5.html#smtp_tls_note_starttls_offer))
  * `postfix_smtp_tls_cafile` [optional]: A file containing CA certificates of root CAs trusted to sign either remote SMTP server certificates or intermediate CA certificates (e.g. `/etc/ssl/certs/ca-certificates.crt`)
 
- * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name (Ubuntu)`]: Greeting banner **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
+ * `postfix_smtpd_banner` [default: `$myhostname ESMTP $mail_name`]: Greeting banner. Postfix substitutes `$mail_name` with simply `Postfix`. Often ` ({{ ansible_facts['distribution'] }})` (distro, as on Debian/Ubuntu) or ` ($mail_version)` (Postfix version) is appended. **You MUST specify $myhostname at the start of the text. This is required by the SMTP protocol.**
  * `postfix_disable_vrfy_command` [default: `true`]: Disable the `SMTP VRFY` command. This stops some techniques used to harvest email addresses
  * `postfix_message_size_limit` [default: `10240000`]: The maximal size in bytes of a message, including envelope information
 

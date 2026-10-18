@@ -1,7 +1,9 @@
 {{ ansible_managed | comment }}
 
+{% for host in postfix_relayhosts %}
 {% if postfix_relayhost_mxlookup %}
-{{ postfix_relayhost }}:{{ postfix_relayhost_port }}	{{ postfix_sasl_user }}:{{ postfix_sasl_password }}
+{{ host }}:{{ postfix_relayhost_port }}	{{ postfix_sasl_user }}:{{ postfix_sasl_password }}
 {% else %}
-[{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}	{{ postfix_sasl_user }}:{{ postfix_sasl_password }}
+[{{ host }}]:{{ postfix_relayhost_port }}	{{ postfix_sasl_user }}:{{ postfix_sasl_password }}
 {% endif %}
+{% endfor %}

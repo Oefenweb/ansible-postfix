@@ -215,7 +215,7 @@ For AWS SES support:
     postfix_aliases:
       - user: root
         alias: sesverified@yourdomain.org
-    postfix_relayhost: [email-smtp.us-east-1.amazonaws.com]
+    postfix_relayhosts: [email-smtp.us-east-1.amazonaws.com]
     postfix_relaytls: true
     # AWS IAM SES credentials (not access key):
     postfix_sasl_user: AKIXXXXXXXXXXXXXXXXX
@@ -233,7 +233,7 @@ For MailHog support:
     postfix_aliases:
       - user: root
         alias: you@yourdomain.org
-    postfix_relayhost: ["{{ ansible_facts['lo']['ipv4']['address'] }}"]
+    postfix_relayhosts: ["{{ ansible_facts['lo']['ipv4']['address'] }}"]
     postfix_relayhost_port: 1025
     postfix_sasl_auth_enable: false
 ```
@@ -249,7 +249,7 @@ For Gmail support:
     postfix_aliases:
       - user: root
         alias: you@yourdomain.org
-    postfix_relayhost: [smtp.gmail.com]
+    postfix_relayhosts: [smtp.gmail.com]
     postfix_relaytls: true
     postfix_smtp_tls_cafile: /etc/ssl/certs/ca-certificates.crt
     postfix_sasl_user: 'foo'
